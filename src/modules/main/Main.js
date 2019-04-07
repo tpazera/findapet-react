@@ -5,12 +5,14 @@ import "./main.scss";
 import Wrapper from "../wrapper/Wrapper";
 import AppRouter from "../router/AppRouter";
 import Header from "../../components/header/Header";
+import LeafletMap from "../../components/leafletMap/LeafletMap";
 
 const Main = () => {
     return (
         <Wrapper>
             <AppRouter>
                 <Header />
+                <LeafletMap />
             </AppRouter>
         </Wrapper>
     );
