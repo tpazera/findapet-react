@@ -1,0 +1,15 @@
+
+//colors
+$primary: #ed6a5a;
+$secondary: #f4f3ee;
+$black: #484848;
+$white: #fff;
+
+//fonts
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+body {
+  background-color: $white;
+  color: $black;
+  font-family: 'Lato';
+}
