@@ -1,5 +1,21 @@
+
+@import '../../index.scss';
+
 #map {
     height: calc(100vh - 126px);
     float: right;
     width: 50%;
+}
+
+@media (min-width: $mapBreakpoint) {
+    #map {
+        visibility: visible !important;
+    }
+}
+
+@media (max-width: $mapBreakpoint) {
+    #map {
+        width: 100%;
+        visibility: hidden;
+    }
 }

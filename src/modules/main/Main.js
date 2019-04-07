@@ -6,6 +6,7 @@ import Wrapper from "../wrapper/Wrapper";
 import AppRouter from "../router/AppRouter";
 import Header from "../../components/header/Header";
 import LeafletMap from "../../components/leafletMap/LeafletMap";
+import MapSwitch from "../../components/mapSwitch/MapSwitch";
 
 const Main = () => {
     return (
@@ -13,6 +14,7 @@ const Main = () => {
             <AppRouter>
                 <Header />
                 <LeafletMap />
+                <MapSwitch />
             </AppRouter>
         </Wrapper>
     );
