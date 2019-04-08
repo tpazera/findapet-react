@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 import './leafletMap.scss';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
@@ -20,18 +21,30 @@ class LeafletMap extends Component {
     }
 
     render() {
-        const position = [this.state.lat, this.state.lng]
+        const {
+            list
+        } = this.props;
+
+        const isListNotEmpty = list && list.length > 0;
+
+        let position = [this.state.lat, this.state.lng]
+        
         return (
             <Map center={position} zoom={this.state.zoom} id="map">
                 <TileLayer
                     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={position}>
-                    <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                </Marker>
+                {isListNotEmpty && list.map((node) => (
+                    <Marker position={[node.lat, node.lng]}>
+                        <Link to="/o-nas">
+                            <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                            </Popup>
+                        </Link>
+                    </Marker>
+                ))}
+                
             </Map>
         )
     }
