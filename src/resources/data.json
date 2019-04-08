@@ -1,0 +1,75 @@
+{
+    "nodeList": [
+      {
+        "id": 1,
+        "title": "Kotek Bartosz",
+        "photoUrl": "https://via.placeholder.com/350x250",
+        "animalType": "Kot - dachowiec",
+        "status": "Poszukiwany",
+        "color": "Zielony",
+        "lat": 51.505,
+        "lng": -0.09
+      },
+      {
+        "id": 2,
+        "title": "Piesek Paweł",
+        "photoUrl": "https://via.placeholder.com/350x250",
+        "animalType": "Ciłała",
+        "status": "Poszukiwany",
+        "color": "czerwony",
+        "lat": 51.605,
+        "lng": -0.09
+      },
+      {
+        "id": 3,
+        "title": "Chomik Rafał",
+        "photoUrl": "https://via.placeholder.com/350x250",
+        "animalType": "Chomik",
+        "status": "Poszukiwany",
+        "color": "Zielony",
+        "lat": 51.705,
+        "lng": -0.09
+      },
+      {
+        "id": 4,
+        "title": "Koń Stefan",
+        "photoUrl": "https://via.placeholder.com/450x350",
+        "animalType": "Koń wyścigowy",
+        "status": "Poszukiwany",
+        "color": "Żółty",
+        "lat": 51.805,
+        "lng": -0.09
+      },
+      {
+        "id": 5,
+        "title": "Kot Jan",
+        "photoUrl": "https://via.placeholder.com/350x250",
+        "animalType": "Perski",
+        "status": "Poszukiwany",
+        "color": "Zielony",
+        "lat": 51.905,
+        "lng": -0.09
+      },
+      {
+        "id": 6,
+        "title": "Pies Kacper",
+        "photoUrl": "https://via.placeholder.com/350x250",
+        "animalType": "Ciłała",
+        "status": "Dziki",
+        "color": "Czerwony",
+        "lat": 52.005,
+        "lng": -0.09
+      },
+      {
+        "id": 7,
+        "title": "Kot Filemon",
+        "photoUrl": "https://via.placeholder.com/350x250",
+        "animalType": "Kot - dachowiec",
+        "status": "Dziki",
+        "color": "Fioletowy",
+        "lat": 52.105,
+        "lng": -0.09
+      }
+    ]
+  }
+  
