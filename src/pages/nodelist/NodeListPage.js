@@ -1,38 +1,42 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import PageWrapper from "../../components/pageWrapper/PageWrapper";
+import SidebarMenu from "../../components/sidebarMenu/SidebarMenu";
+import PageContent from "../../components/pageContent/PageContent";
 
 class NodeListPage extends Component {
     render() {
         return (
             <PageWrapper>
-                <div>Node Page</div>
-                <Link to="/error">Error</Link>
-                <Link to="/n/3">node page</Link>
-                <Link to="/">home</Link>
-                <p>
-                Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Etiam iaculis nunc ac metus. Aenean massa.
+                <SidebarMenu />
+                <PageContent>
+                Integer tincidunt. Fusce vulputate eleifend sapien. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Nunc nonummy metus.
 
-Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.
+Vivamus euismod mauris. Nulla consequat massa quis enim. Nulla facilisi. Phasellus consectetuer vestibulum elit. Etiam rhoncus.
 
-Morbi nec metus. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent egestas tristique nibh.Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Etiam iaculis nunc ac metus. Aenean massa.
+Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Curabitur nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus laoreet. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi.
 
-Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.
+Nunc nec neque. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Sed lectus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Quisque malesuada placerat nisl.
 
-Morbi nec metus. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent egestas tristique nibh.Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Etiam iaculis nunc ac metus. Aenean massa.
+Morbi vestibulum volutpat enim. Duis lobortis massa imperdiet quam. Praesent turpis. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam quis ante.
+Integer tincidunt. Fusce vulputate eleifend sapien. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Nunc nonummy metus.
 
-Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.
+Vivamus euismod mauris. Nulla consequat massa quis enim. Nulla facilisi. Phasellus consectetuer vestibulum elit. Etiam rhoncus.
 
-Morbi nec metus. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent egestas tristique nibh.Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Etiam iaculis nunc ac metus. Aenean massa.
+Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Curabitur nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus laoreet. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi.
 
-Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.
+Nunc nec neque. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Sed lectus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Quisque malesuada placerat nisl.
 
-Morbi nec metus. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent egestas tristique nibh.Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel, lacus. Etiam iaculis nunc ac metus. Aenean massa.
+Morbi vestibulum volutpat enim. Duis lobortis massa imperdiet quam. Praesent turpis. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam quis ante.
+Integer tincidunt. Fusce vulputate eleifend sapien. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus leo dolor, tempus non, auctor et, hendrerit quis, nisi. Nunc nonummy metus.
 
-Sed augue ipsum, egestas nec, vestibulum et, malesuada adipiscing, dui. Duis arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis, ipsum. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.
+Vivamus euismod mauris. Nulla consequat massa quis enim. Nulla facilisi. Phasellus consectetuer vestibulum elit. Etiam rhoncus.
 
-Morbi nec metus. Vestibulum purus quam, scelerisque ut, mollis sed, nonummy id, metus. Praesent egestas tristique nibh.
-                </p>
+Mauris turpis nunc, blandit et, volutpat molestie, porta ut, ligula. Curabitur nisi. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus laoreet. Vestibulum rutrum, mi nec elementum vehicula, eros quam gravida nisl, id fringilla neque ante vel mi.
+
+Nunc nec neque. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Sed lectus. Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet, leo. Quisque malesuada placerat nisl.
+
+Morbi vestibulum volutpat enim. Duis lobortis massa imperdiet quam. Praesent turpis. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam quis ante.
+                </PageContent>
             </PageWrapper>
         );
     }

@@ -5,6 +5,7 @@
     height: calc(100vh - 126px);
     float: right;
     width: 50%;
+    min-height: 340px;
 }
 
 @media (min-width: $mapBreakpoint) {
