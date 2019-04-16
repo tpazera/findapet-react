@@ -13,7 +13,7 @@
     "node-sass": "^4.11.0",
     "npm": "^6.9.0",
     "react": "^16.8.6",
-    "react-bootstrap": "^1.0.0-beta.6",
+    "react-bootstrap": "^1.0.0-beta.8",
     "react-dom": "^16.8.6",
     "react-leaflet": "^2.2.1",
     "react-leaflet-markercluster": "^1.1.8",
