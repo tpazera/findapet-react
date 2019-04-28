@@ -1,4 +1,3 @@
-
 //colors
 $primary: #ed6a5a;
 $secondary: #f4f3ee;
@@ -6,7 +5,7 @@ $black: #484848;
 $white: #fff;
 
 //fonts
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url("https://fonts.googleapis.com/css?family=Lato");
 
 //map breakpoint
 $mapBreakpoint: "1000px";
@@ -14,6 +13,12 @@ $mapBreakpoint: "1000px";
 body {
   background-color: $white;
   color: $black;
-  font-family: 'Lato';
+  font-family: "Lato";
   overflow: overlay;
 }
+
+$theme-colors: (
+  primary: $primary
+);
+
+@import "~bootstrap/scss/bootstrap";

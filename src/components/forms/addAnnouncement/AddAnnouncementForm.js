@@ -4,11 +4,11 @@ import axios from "axios";
 import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
-import "./loginForm.scss";
+import "./addAnnouncementForm.scss";
 
 import Modal from "../../modal/Modal";
 
-class LoginForm extends Component {
+class AddAnnouncementForm extends Component {
   state = {
     email: "",
     password: ""
@@ -39,28 +39,19 @@ class LoginForm extends Component {
     return (
       <>
         <Alert />
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>E-mail</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Podaj swój adres e-mail"
-            onChange={this.onEmailChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Hasło</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Podaj swoje hasło"
-            onChange={this.onPasswordChange}
-          />
-        </Form.Group>
-        <Button variant="primary" onClick={this.onFormSubmit}>
-          Login
-        </Button>
+        <div class="container">
+          <div class="row">
+            <div class="col-6">a</div>
+            <div class="col-6">b</div>
+            <div class="col-6">c</div>
+            <div class="col-6">d</div>
+            <div class="col-6">e</div>
+            <div class="col-6">f</div>
+          </div>
+        </div>
       </>
     );
   }
 }
 
-export default LoginForm;
+export default AddAnnouncementForm;

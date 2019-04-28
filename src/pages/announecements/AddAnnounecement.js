@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import PageWrapper from "../../components/pageWrapper/PageWrapper";
 import SidebarMenu from "../../components/sidebarMenu/SidebarMenu";
 import PageContent from "../../components/pageContent/PageContent";
+import AddAnnouncementForm from "../../components/forms/addAnnouncement/AddAnnouncementForm";
 
 class AddAnnounecement extends Component {
   state = {
@@ -15,7 +16,7 @@ class AddAnnounecement extends Component {
       <PageWrapper>
         <SidebarMenu />
         <PageContent>
-          <h2>Utwórz nowe zgłoszenie</h2>
+          <AddAnnouncementForm />
         </PageContent>
       </PageWrapper>
     );
