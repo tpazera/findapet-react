@@ -39,14 +39,14 @@ class AddAnnouncementForm extends Component {
     return (
       <>
         <Alert />
-        <div class="container">
-          <div class="row">
-            <div class="col-6">a</div>
-            <div class="col-6">b</div>
-            <div class="col-6">c</div>
-            <div class="col-6">d</div>
-            <div class="col-6">e</div>
-            <div class="col-6">f</div>
+        <div className="container">
+          <div className="row">
+            <div className="col-6">a</div>
+            <div className="col-6">b</div>
+            <div className="col-6">c</div>
+            <div className="col-6">d</div>
+            <div className="col-6">e</div>
+            <div className="col-6">f</div>
           </div>
         </div>
       </>
