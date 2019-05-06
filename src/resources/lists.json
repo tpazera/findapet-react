@@ -1,0 +1,12 @@
+{
+    "colors": [
+      "Czarny", "Biały", "Żółty", "Niebieski"
+    ],
+    "types": [
+      "Ciłała", "Perski", "Kot - dachowiec", "Koń wyścigowy", "Chomik"
+    ],
+    "status": [
+      "Poszukiwany", "Dziki", "Znaleziony"
+    ]
+}
+  
