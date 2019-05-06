@@ -1,5 +1,39 @@
 @import "../../index.scss";
 
-.notif {
-    overflow: overlay;
+.nodeButtons {
+    .btn {
+        margin-right: 15px;
+    }
 }
+
+.nodeInfoList {
+    margin-top: 15px;
+    list-style-type: none;
+    margin-left: 0;
+    text-indent: 0;
+    padding-left: 0;
+}
+
+.gallery {
+    img {
+        width: 50%;
+        height: auto;
+        display: inline;
+        &:first-child {
+            width: 100%;
+        }
+    }
+}
+
+
+@media (min-width: 1400px) {
+    .nodeTitle {
+        width: 50%;
+        max-width: 50%;
+    }
+    .nodeButtons {
+        width: 50%;
+        max-width: 50%;
+    }
+}
+                                                                                         

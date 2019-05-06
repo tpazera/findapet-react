@@ -13,10 +13,12 @@ class ErrorPage extends Component {
         return (
             <PageWrapper>
                 <SidebarMenu />
-                <PageContent>
-                    <FontAwesomeIcon icon="exclamation-triangle" />
-                    <h1>Strona nie została odnaleziona :(</h1>
-                </PageContent>
+                <div className="errorPageContent">
+                    <PageContent>
+                        <FontAwesomeIcon icon="exclamation-triangle" />
+                        <h1>Strona nie została odnaleziona :(</h1>
+                    </PageContent>
+                </div>
             </PageWrapper>
         );
     }

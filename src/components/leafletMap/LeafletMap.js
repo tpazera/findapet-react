@@ -36,7 +36,7 @@ class LeafletMap extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {isListNotEmpty && list.map((node) => (
-                    <Marker position={[node.lat, node.lng]}>
+                    <Marker key={node.id} position={[node.lat, node.lng]}>
                         <Link to="/o-nas">
                             <Popup>
                             A pretty CSS3 popup. <br /> Easily customizable.

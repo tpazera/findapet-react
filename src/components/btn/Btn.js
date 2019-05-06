@@ -6,7 +6,7 @@ class Btn extends Component {
     render() {
 
         return (
-                <Button variant="outline-secondary" id="btn">{this.props.text}</Button>
+                <Button variant={this.props.variant}>{this.props.text}</Button>
         );
     }
 }

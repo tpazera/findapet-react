@@ -4,8 +4,6 @@ $secondary: #f4f3ee;
 $black: #484848;
 $white: #fff;
 
-//fonts
-@import url("https://fonts.googleapis.com/css?family=Lato");
 
 //map breakpoint
 $mapBreakpoint: "1000px";
@@ -21,4 +19,3 @@ $theme-colors: (
   primary: $primary
 );
 
-@import "~bootstrap/scss/bootstrap";
