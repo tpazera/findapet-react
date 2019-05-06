@@ -8,11 +8,17 @@ import nodes from "../../resources/data.json";
 
 class UserNodesPage extends Component {
     render() {
+
+        let list = nodes.nodeList.filter(
+            item => item.userid === 1
+        ); 
+
         return (
             <PageWrapper>
+                {console.log(list)}
                 <SidebarMenu />
                 <PageContent>
-                    <NodeList list={nodes.nodeList} />
+                    <NodeList list={list} />
                 </PageContent>
             </PageWrapper>
         );

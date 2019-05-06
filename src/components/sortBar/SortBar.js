@@ -17,8 +17,8 @@ class PetInfo extends Component {
                     <Form.Group as={Col} controlId="selectColor">
                     <Form.Label>Kolor</Form.Label>
                     <Form.Control as="select">
-                        {colors.map(color => (
-                            <option>{color}</option>
+                        {colors.map((item,i) => (
+                            <option key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
                     </Form.Group>
@@ -26,8 +26,8 @@ class PetInfo extends Component {
                     <Form.Group as={Col} controlId="selectType">
                     <Form.Label>Typ</Form.Label>
                     <Form.Control as="select">
-                        {types.map(type => (
-                            <option>{type}</option>
+                        {types.map((item,i) => (
+                            <option key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
                     </Form.Group>                    
@@ -35,8 +35,8 @@ class PetInfo extends Component {
                     <Form.Group as={Col} controlId="selectStatus">
                     <Form.Label>Status</Form.Label>
                     <Form.Control as="select">
-                        {status.map(stat => (
-                            <option>{stat}</option>
+                        {status.map((item,i) => (
+                            <option key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
                     </Form.Group>
