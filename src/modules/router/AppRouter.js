@@ -14,7 +14,7 @@ const AppRouter = ({ children }) => (
       <Switch>
         <Route path="/" exact component={NodeListPage} />
         <Route path="/n/:id" component={NodePage} />
-        <Route path="/twoje-zgloszenia" component={UserNodesPage} />
+        <Route path="/twoje-ogloszenia" component={UserNodesPage} />
         <Route path="/dodaj-zgloszenie" component={AddAnnounecement} />
         <Route path="/o-nas" component={AboutPage} />
         <Route component={ErrorPage} />
