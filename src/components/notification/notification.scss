@@ -1,7 +1,23 @@
 @import "../../index.scss";
 
+.nodeTitle {
+    margin-bottom: 15px;
+    img {
+        height: 60px;
+        float: left;
+        margin-right: 10px;
+    }
+    h1 {
+        display: inline;
+        line-height: 60px;
+    }
+}
+
 .nodeButtons {
+    text-align: right;
     .btn {
+        height: 40px;
+        margin: 10px 0;
         margin-right: 15px;
     }
 }
