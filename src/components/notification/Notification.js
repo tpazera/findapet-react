@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
 import Btn from "../../components/btn/Btn";
-import Comment from "../../components/comment/Comment";
-import NotificationHeader from "../../components/notificationHeader/NotificationHeader";
-import PetInfo from "../../components/petInfo/PetInfo";
-import PageContent from "../../components/pageContent/PageContent";
 import './notification.scss';
 import { Container, Row, Col, Card, Form, Button, Pagination } from "react-bootstrap";
 import comments from "../../resources/comments.json";
@@ -27,14 +22,12 @@ class Notification extends Component {
         }
 
         const paginationBasic = (
-            <div class="pagination">
+            <div className="pagination">
               <Pagination>{items}</Pagination>
             </div>
         );
                 
         return (
-
-            
 
             <Container>
                 <Row className="nodeHeader">
@@ -73,7 +66,7 @@ class Notification extends Component {
                     <Col className="gallery">
                         {node.photoUrl.length > 0 && 
                             node.photoUrl.map((image, i) => (
-                                <img src={node.photoUrl[i]} alt=""/>                     
+                                <img key={i} src={node.photoUrl[i]} alt=""/>                     
                             ))
                         }
                     </Col>
@@ -81,7 +74,7 @@ class Notification extends Component {
                 <Row>
                     <Col className="comments">
                         {commentsList.map((comment) => (
-                            <Card key={comment.id}>
+                            <Card key={comment.idcomment}>
                                 <Card.Header>{comment.user}</Card.Header>
                                 <Card.Body>{comment.text}</Card.Body>
                             </Card>
