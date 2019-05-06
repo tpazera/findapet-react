@@ -18,7 +18,7 @@ const NodeCard = ({
     };
 
     let styles = {
-        backgroundImage: 'url(' + photoUrl + ')'
+        backgroundImage: 'url(' + photoUrl[0] + ')'
     }
 
     return (

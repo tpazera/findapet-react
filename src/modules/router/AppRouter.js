@@ -13,7 +13,7 @@ const AppRouter = ({ children }) => (
       {children}
       <Switch>
         <Route path="/" exact component={NodeListPage} />
-        <Route path="/n/:id(\d+)" component={NodePage} />
+        <Route path="/n/:id" component={NodePage} />
         <Route path="/twoje-zgloszenia" component={UserNodesPage} />
         <Route path="/dodaj-zgloszenie" component={AddAnnounecement} />
         <Route path="/o-nas" component={AboutPage} />

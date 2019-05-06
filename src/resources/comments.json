@@ -1,0 +1,20 @@
+{
+  "comments": [
+    {
+      "idcomment": 1,
+      "user": "Anna",
+      "text": "Coś tam widziałam"
+    },
+    {
+      "idcomment": 2,
+      "user": "Anna",
+      "text": "Lorem ipsum..."
+    },
+    {
+      "idcomment": 3,
+      "user": "Paweł",
+      "text": "Ale słodziak"
+    }
+  ]
+}
+  

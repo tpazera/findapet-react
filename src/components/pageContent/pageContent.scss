@@ -3,7 +3,7 @@
 #pageContent {
     padding: 30px;
     display: inline-block;
-    width: calc(50vw - 120px);
+    width: calc(100% - 120px);
     min-height: 340px;
     height: calc(100vh - 129px);
     overflow: overlay;
@@ -11,6 +11,6 @@
 
 @media (max-width: $mapBreakpoint) {
     #pageContent {
-        width: calc(100vw - 120px);
+        width: calc(100% - 120px);
     }
 }
