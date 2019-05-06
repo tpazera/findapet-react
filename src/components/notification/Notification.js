@@ -26,15 +26,28 @@ class Notification extends Component {
               <Pagination>{items}</Pagination>
             </div>
         );
+
+        let type = node.animalType;
+        let src;
+        if(type == "pies") src = "/images/dog.svg";
+        else if(type == "kot") src = "/images/cat.svg";
+        else if(type == "mysz") src = "/images/mouse.svg";
+        else if(type == "papuga") src = "/images/parrot.svg";
+        else if(type == "królik") src = "/images/bunny.svg";
+        else src= "";
                 
         return (
+            
 
             <Container>
                 <Row className="nodeHeader">
-                    <Col xs={12} md={4} xl={12} className="nodeTitle">
+                    <Col xs={12} md={6} xl={12} className="nodeTitle">
+                        {src != "" &&
+                            <img src={src} alt={type} />
+                        }
                         <h1>{node.title}</h1>
                     </Col>
-                    <Col xs={12} md={8} xl={12} className="nodeButtons">
+                    <Col xs={12} md={6} xl={12} className="nodeButtons">
                         <Btn text="zgłoś" variant="danger" />
                         <Btn text="kontakt" variant="success" />
                         <Btn text="..." variant="primary" />
