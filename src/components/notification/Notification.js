@@ -6,15 +6,36 @@ import NotificationHeader from "../../components/notificationHeader/Notification
 import PetInfo from "../../components/petInfo/PetInfo";
 import PageContent from "../../components/pageContent/PageContent";
 import './notification.scss';
-import { Container, Row, Col } from "react-bootstrap";
-import nodes from "../../resources/data.json";
+import { Container, Row, Col, Card, Form, Button, Pagination } from "react-bootstrap";
+import comments from "../../resources/comments.json";
 
 class Notification extends Component {
     render() {
 
         const node = this.props;
-        
+
+        const commentsList = comments.comments;
+
+        let active = 2;
+        let items = [];
+        for (let number = 1; number <= 5; number++) {
+            items.push(
+                <Pagination.Item key={number} active={number === active}>
+                {number}
+                </Pagination.Item>,
+            );
+        }
+
+        const paginationBasic = (
+            <div class="pagination">
+              <Pagination>{items}</Pagination>
+            </div>
+        );
+                
         return (
+
+            
+
             <Container>
                 <Row className="nodeHeader">
                     <Col xs={12} md={4} xl={12} className="nodeTitle">
@@ -57,47 +78,25 @@ class Notification extends Component {
                         }
                     </Col>
                 </Row>
+                <Row>
+                    <Col className="comments">
+                        {commentsList.map((comment) => (
+                            <Card key={comment.id}>
+                                <Card.Header>{comment.user}</Card.Header>
+                                <Card.Body>{comment.text}</Card.Body>
+                            </Card>
+                        ))}
+                        {paginationBasic}
+                        <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Control as="textarea" rows="3" />
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Dodaj komentarz
+                        </Button>
+                    </Col>
+                </Row>
+
             </Container>
-            // <div id="notif0" classname="notif">
-            //     <NotificationHeader text="Zgloszenie nr: 1234" fontSize={fontSize0} color={color0} />
-            //     <br />
-            //     <br />
-            //     <NotificationHeader text="Zgubił mi się kotek w okolicach Bochnii!" fontSize={fontSize1} color={color1} />
-            //     <br />
-            //     <br />
-            //     <div id="btngroup0" className="btngroup">
-            //         <Btn text="Powrót" id="btn1" className="btn11"/>
-            //         <span>      </span>
-            //         <Btn text="Dane Kontaktowe" id="btn2" className="btn22"/>
-            //         <span>      </span>
-            //         <Btn text="cos ..." id="btn3" className="btn33"/>
-            //     </div>
-            //     <br />
-            //     <br />
-            //     <NotificationHeader text="Opis Zgłoszenia: " fontSize={fontSize2} color={color0} />
-            //     <br />
-            //     <br />
-            //     <PetInfo text="Wódka – wysokoprocentowy napój alkoholowy uzyskiwany przez zmieszanie w odpowiednich proporcjach 
-            //     spirytusu rektyfikowanego z wodą. Może mieć charakter czysty, bez dodatków, lub smakowy. Zawartość alkoholu etylowego 
-            //     w wódce wynosi nie mniej niż 37,5% obj., zwykle 40% obj. Surowcami do produkcji wódek są produkty pochodzenia rolniczego, 
-            //     tradycyjnie zboża lub ziemniaki. Do etapów produkcji wódki należy na ogół oczyszczenie surowców, parowanie mające na celu 
-            //     upłynnienie skrobi zawartej w surowcach, zacieranie, czyli rozkład skrobi do cukrów, fermentacja cukrów przeprowadzana 
-            //     przez drożdże, destylacja, rektyfikacja, mieszanie powstałego spirytusu z wodą, filtracja i rozlew." 
-            //     image="http://savings.gov.pk/wp-content/plugins/ldd-directory-lite/public/images/noimage.png"/>
-            //     <br />
-            //     <NotificationHeader text="Komentarze: " fontSize={fontSize2} color={color0} />
-            //     <br />
-            //     <br />
-            //     <Comment text="Ale ładny <3" who="Asia3212" whocolor={color0} color={color1} fontSizeWho={15} id="comm1" />
-            //     <br />
-            //     <br />
-            //     <Comment text="Mam nadzieję, ze go znajdziesz" who="Andrzej583" whocolor={color0} color={color1}  fontSizeWho={15} id="comm2" />
-            //     <br />
-            //     <br />
-            //     <Comment text="Widziałem go dzisiaj rano na brzozowej" who="Pani Krystyna" whocolor={color0} color={color1}  fontSizeWho={15} id="comm3" />
-            //     <br />
-            //     <br />
-            // </div>
         );
     }
 }

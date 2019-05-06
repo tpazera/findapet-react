@@ -25,6 +25,25 @@
     }
 }
 
+.comments {
+    margin-top: 30px;
+    .pagination {
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+    textarea {
+        margin-top: 15px;
+    }    
+}
+
+
+@media (max-width: 576px) {
+    .gallery {
+        img {
+            width: 100%;
+        }
+    }
+}
 
 @media (min-width: 1400px) {
     .nodeTitle {
