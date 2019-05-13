@@ -14,7 +14,7 @@
 }
 
 .nodeButtons {
-    text-align: right;
+    text-align: left;
     .btn {
         height: 40px;
         margin: 10px 0;
@@ -61,12 +61,13 @@
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1800px) {
     .nodeTitle {
         width: 50%;
         max-width: 50%;
     }
     .nodeButtons {
+        text-align: right;
         width: 50%;
         max-width: 50%;
     }

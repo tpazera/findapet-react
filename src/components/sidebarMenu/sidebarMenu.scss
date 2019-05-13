@@ -3,7 +3,7 @@
 #sidebarMenu {
     float: left;
     width: 120px;
-    background-color: rgba(244, 243, 238, 0.54);
+    background-color: $secondary;
     min-height: calc(100vh - 126px);
     a {
         text-align: center;
