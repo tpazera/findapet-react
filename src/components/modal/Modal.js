@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import "./modal.scss";
 
 const ModalComponent = ({ children, show, toggleModal, type }) => (

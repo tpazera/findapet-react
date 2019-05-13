@@ -101,7 +101,7 @@ class LeafletMap extends Component {
         ); 
 
         let others = list.filter(
-            item => (item.animalType != "pies" && item.animalType != "kot" && item.animalType != "mysz" && item.animalType != "królik" && item.animalType != "papuga")
+            item => (item.animalType !== "pies" && item.animalType !== "kot" && item.animalType !== "mysz" && item.animalType !== "królik" && item.animalType !== "papuga")
         ); 
 
         if (navigator.geolocation) {

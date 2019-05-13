@@ -28,8 +28,6 @@ class PetInfo extends Component {
                 const types = res.data;
                 this.setState({ types });
             })
-        
-
     }
 
     render() {
