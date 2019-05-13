@@ -4,14 +4,19 @@ import axios from "axios";
 import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
-import "./loginForm.scss";
+import "./registerForm.scss";
 
 import Modal from "../../modal/Modal";
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
   state = {
+    username: "",
     email: "",
     password: ""
+  };
+
+  onUsernameChange = e => {
+    this.setState({ username: e.target.value });
   };
 
   onEmailChange = e => {
@@ -39,15 +44,15 @@ class LoginForm extends Component {
     return (
       <>
         <Alert />
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>E-mail</Form.Label>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Nazwa użytkownika</Form.Label>
           <Form.Control
-            type="email"
-            placeholder="Podaj swój adres e-mail"
-            onChange={this.onEmailChange}
+            type="text"
+            placeholder="Podaj nazwę użytkownika"
+            onChange={this.onUsernameChange}
           />
         </Form.Group>
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId="formPassword">
           <Form.Label>Hasło</Form.Label>
           <Form.Control
             type="password"
@@ -55,16 +60,33 @@ class LoginForm extends Component {
             onChange={this.onPasswordChange}
           />
         </Form.Group>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Powtórz hasło</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Podaj swoje hasło ponownie"
+            onChange={this.onPasswordChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="formEmail">
+          <Form.Label>E-mail</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Podaj swój adres e-mail"
+            onChange={this.onEmailChange}
+          />
+        </Form.Group>
+
         <Button
           className="float-right"
           variant="primary"
           onClick={this.onFormSubmit}
         >
-          Login
+          Zarejestruj się
         </Button>
       </>
     );
   }
 }
 
-export default LoginForm;
+export default RegisterForm;
