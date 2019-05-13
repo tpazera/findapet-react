@@ -2,14 +2,37 @@ import React, { Component } from 'react';
 import "./sortBar.scss"
 import { Col, Form, Button } from 'react-bootstrap';
 import lists from "../../resources/lists.json";
+import axios from 'axios';
 
 class PetInfo extends Component {
 
-    render() {
+    state = {
+        colors: [],
+        status: [],
+        types: [],
+    }
 
-        const colors = lists.colors;
-        const types = lists.types;
-        const status = lists.status;
+    componentDidMount() {
+        axios.get(`http://find-pet-app.herokuapp.com/rest/announcement/colors`)
+            .then(res => {
+                const colors = res.data;
+                this.setState({ colors });
+            })
+        axios.get(`https://find-pet-app.herokuapp.com/rest/announcement/status`)
+            .then(res => {
+                const status = res.data;
+                this.setState({ status });
+            })
+        axios.get(`https://find-pet-app.herokuapp.com/rest/announcement/types`)
+            .then(res => {
+                const types = res.data;
+                this.setState({ types });
+            })
+        
+
+    }
+
+    render() {
 
         return (
             <div>
@@ -17,7 +40,7 @@ class PetInfo extends Component {
                     <Form.Group as={Col} controlId="selectColor">
                     <Form.Label>Kolor</Form.Label>
                     <Form.Control as="select">
-                        {colors.map((item,i) => (
+                        {this.state.colors.map((item,i) => (
                             <option key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
@@ -26,7 +49,7 @@ class PetInfo extends Component {
                     <Form.Group as={Col} controlId="selectType">
                     <Form.Label>Typ</Form.Label>
                     <Form.Control as="select">
-                        {types.map((item,i) => (
+                        {this.state.types.map((item,i) => (
                             <option key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
@@ -35,7 +58,7 @@ class PetInfo extends Component {
                     <Form.Group as={Col} controlId="selectStatus">
                     <Form.Label>Status</Form.Label>
                     <Form.Control as="select">
-                        {status.map((item,i) => (
+                        {this.state.status.map((item,i) => (
                             <option key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
