@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Link } from 'react-router-dom';
+import MarkerClusterGroup from "../markerClusterGroup/MarkerClusterGroup";
 import './leafletMap.scss';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -13,37 +15,181 @@ L.Icon.Default.mergeOptions({
     shadowUrl: require('leaflet/dist/images/marker-shadow.png')
 });
 
+const catMarker = L.icon({
+    iconUrl: '/images/cat.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+});
+
+const dogMarker = L.icon({
+    iconUrl: '/images/dog.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+});
+
+const defaultMarker = L.icon({
+    iconUrl: '/images/marker.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+});
+
+const bunnyMarker = L.icon({
+    iconUrl: '/images/bunny.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+});
+
+const parrotMarker = L.icon({
+    iconUrl: '/images/parrot.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+});
+
+const mouseMarker = L.icon({
+    iconUrl: '/images/mouse.svg',
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+});
+
+
 class LeafletMap extends Component {
-    state = {
-        lat: 51.505,
-        lng: -0.09,
-        zoom: 13,
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 13
+        }
+    }
+
+    saveLocationInfo(position) {
+        this.setState({
+            lng: position.coords.longitude,
+            lat: position.coords.latitude,
+            zoom: 13
+        });
+      
+        console.log(`longitude: ${ this.state.lng } | latitude: ${ this.state.lat }`);
     }
 
     render() {
+
+
         const {
             list
         } = this.props;
+
+        let dogs = list.filter(
+            item => item.animalType === "pies"
+        ); 
+
+        let cats = list.filter(
+            item => item.animalType === "kot"
+        ); 
+
+        let bunnies = list.filter(
+            item => item.animalType === "królik"
+        ); 
+
+        let mouses = list.filter(
+            item => item.animalType === "mysz"
+        ); 
+
+        let parrots = list.filter(
+            item => item.animalType === "papuga"
+        ); 
+
+        let others = list.filter(
+            item => (item.animalType != "pies" && item.animalType != "kot" && item.animalType != "mysz" && item.animalType != "królik" && item.animalType != "papuga")
+        ); 
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.saveLocationInfo.bind(this));
+        }
+
 
         const isListNotEmpty = list && list.length > 0;
 
         let position = [this.state.lat, this.state.lng]
         
         return (
-            <Map center={position} zoom={this.state.zoom} id="map">
+            <Map center={position} zoom={this.state.zoom} id="map" maxZoom={25}>
                 <TileLayer
                     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {isListNotEmpty && list.map((node) => (
-                    <Marker position={[node.lat, node.lng]}>
-                        <Link to="/o-nas">
-                            <Popup>
-                            A pretty CSS3 popup. <br /> Easily customizable.
-                            </Popup>
-                        </Link>
-                    </Marker>
-                ))}
+                <MarkerClusterGroup>
+                    {/* {isListNotEmpty && list.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}>
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))} */}
+                    {isListNotEmpty && others.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}
+                            icon={defaultMarker}
+                        >
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))}
+                    {isListNotEmpty && dogs.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}
+                            icon={dogMarker}
+                        >
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))}
+                    {isListNotEmpty && cats.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}
+                            icon={catMarker}
+                        >
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))}
+                    {isListNotEmpty && bunnies.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}
+                            icon={bunnyMarker}
+                        >
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))}
+                    {isListNotEmpty && mouses.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}
+                            icon={mouseMarker}
+                        >
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))}
+                    {isListNotEmpty && parrots.map((node) => (
+                        <Marker key={node.id} position={[node.lat, node.lng]}
+                            icon={parrotMarker}
+                        >
+                                <Popup>
+                                    <p>{node.title}</p>
+                                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                                </Popup>
+                        </Marker>
+                    ))}
+                </MarkerClusterGroup>
+
                 
             </Map>
         )

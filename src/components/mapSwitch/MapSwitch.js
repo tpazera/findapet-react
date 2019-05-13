@@ -17,8 +17,10 @@ class MapSwitch extends Component {
         })
         if (this.state.isChecked) {
             document.getElementById("map").style.visibility = "hidden";
+            document.getElementById("pageWrapper").style.zIndex = "1";
         } else {
             document.getElementById("map").style.visibility = "visible";
+            document.getElementById("pageWrapper").style.zIndex = "-1";
         }
     }
 

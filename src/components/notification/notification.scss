@@ -1,0 +1,75 @@
+@import "../../index.scss";
+
+.nodeTitle {
+    margin-bottom: 15px;
+    img {
+        height: 60px;
+        float: left;
+        margin-right: 10px;
+    }
+    h1 {
+        display: inline;
+        line-height: 60px;
+    }
+}
+
+.nodeButtons {
+    text-align: left;
+    .btn {
+        height: 40px;
+        margin: 10px 0;
+        margin-right: 15px;
+    }
+}
+
+.nodeInfoList {
+    margin-top: 15px;
+    list-style-type: none;
+    margin-left: 0;
+    text-indent: 0;
+    padding-left: 0;
+}
+
+.gallery {
+    img {
+        width: 50%;
+        height: auto;
+        display: inline;
+        &:first-child {
+            width: 100%;
+        }
+    }
+}
+
+.comments {
+    margin-top: 30px;
+    .pagination {
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+    textarea {
+        margin-top: 15px;
+    }    
+}
+
+
+@media (max-width: 576px) {
+    .gallery {
+        img {
+            width: 100%;
+        }
+    }
+}
+
+@media (min-width: 1800px) {
+    .nodeTitle {
+        width: 50%;
+        max-width: 50%;
+    }
+    .nodeButtons {
+        text-align: right;
+        width: 50%;
+        max-width: 50%;
+    }
+}
+                                                                                         

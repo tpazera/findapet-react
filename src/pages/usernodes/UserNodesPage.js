@@ -1,9 +1,25 @@
 import React, { Component } from "react";
+import PageWrapper from "../../components/pageWrapper/PageWrapper";
+import SidebarMenu from "../../components/sidebarMenu/SidebarMenu";
+import PageContent from "../../components/pageContent/PageContent";
+import NodeList from "../../components/nodeList/NodeList";
+import nodes from "../../resources/data.json";
 
 class UserNodesPage extends Component {
     render() {
+
+        let list = nodes.nodeList.filter(
+            item => item.userid === 1
+        ); 
+
         return (
-            <div>UserNodes Page</div>
+            <PageWrapper>
+                {console.log(list)}
+                <SidebarMenu />
+                <PageContent>
+                    <NodeList list={list} />
+                </PageContent>
+            </PageWrapper>
         );
     }
 }

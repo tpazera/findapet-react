@@ -1,5 +1,6 @@
 
 @import '../../index.scss';
+@import '~react-leaflet-markercluster/dist/styles.min.css'; // sass
 
 #map {
     height: calc(100vh - 126px);
