@@ -28,16 +28,25 @@ class RegisterForm extends Component {
   };
 
   onFormSubmit = () => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos/1")
-      .then(response => {
-        Alert.success("Zalogowano", {
-          position: "bottom-left",
-          effect: "slide",
-          timeout: 1000
-        });
-      })
-      .catch(error => console.log(error.response));
+    axios.post('https://find-pet-app.herokuapp.com/auth', {
+      login: 'tomek2',
+      email: 'tomek@sd.pl',
+      password: 'golicipke'
+    })
+    .then((response) => {
+      this.setState({ 
+        token : response.data.Authorization,
+        id : response.data.id
+      });
+      Alert.success("Zalogowano", {
+        position: "bottom-left",
+        effect: "slide",
+        timeout: 5000
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   render() {

@@ -10,41 +10,51 @@ import Modal from "../../modal/Modal";
 
 class LoginForm extends Component {
   state = {
-    email: "",
-    password: ""
+    login: "",
+    password: "",
+    id: "",
+    token: ""
   };
 
-  onEmailChange = e => {
-    this.setState({ email: e.target.value });
+  onLoginChange = e => {
+    this.setState({ login: e.target.value });
   };
 
   onPasswordChange = e => {
-    this.setState({ password: e.target.value });
+    this.setState({ login: e.target.value });
   };
 
   onFormSubmit = () => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/todos/1")
-      .then(response => {
-        Alert.success("Zalogowano", {
-          position: "bottom-left",
-          effect: "slide",
-          timeout: 1000
-        });
-      })
-      .catch(error => console.log(error.response));
+    axios.post('https://find-pet-app.herokuapp.com/auth', {
+      login: 'tomek',
+      password: 'golicipke'
+    })
+    .then((response) => {
+      this.setState({ 
+        token : response.data.Authorization,
+        id : response.data.id
+      });
+      Alert.success("Zalogowano", {
+        position: "bottom-left",
+        effect: "slide",
+        timeout: 5000
+      });
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   };
 
   render() {
     return (
       <>
         <Alert />
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>E-mail</Form.Label>
+        <Form.Group controlId="formBasicLogin">
+          <Form.Label>Nazwa użytkownika</Form.Label>
           <Form.Control
-            type="email"
-            placeholder="Podaj swój adres e-mail"
-            onChange={this.onEmailChange}
+            type="text"
+            placeholder="Podaj swój login"
+            onChange={this.onLoginChange}
           />
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
@@ -60,7 +70,7 @@ class LoginForm extends Component {
           variant="primary"
           onClick={this.onFormSubmit}
         >
-          Login
+          SUBMIT
         </Button>
       </>
     );
