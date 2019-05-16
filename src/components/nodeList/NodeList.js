@@ -18,10 +18,10 @@ class NodeList extends Component {
                         key={node.id}
                         id={node.id}
                         title={node.title}
-                        photoUrl={node.photoUrl}
+                        photoUrl={node.photoURL}
                         animalType={node.animalType}
                         status={node.status}
-                        color={node.color}
+                        color={node.petColor}
                     />
                 ))}
             </div>
