@@ -54,7 +54,6 @@ class Notification extends Component {
                 
         return (
             
-
             <Container>
                 <Row className="nodeHeader">
                     <Col xs={12} md={6} xl={12} className="nodeTitle">
@@ -76,7 +75,7 @@ class Notification extends Component {
                                 {node.animalType}
                             </li>
                             <li>
-                                {node.petColor}
+                                {node.petColors}
                             </li>
                             <li>
                                 {node.status}
