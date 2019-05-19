@@ -13,7 +13,7 @@ class PetInfo extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://find-pet-app.herokuapp.com/rest/announcement/colors`)
+        axios.get(`https://find-pet-app.herokuapp.com/rest/announcement/colors`, {port: 8080})
             .then(res => {
                 const colors = res.data;
                 this.setState({ colors });

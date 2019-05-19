@@ -3,14 +3,31 @@ import Btn from "../../components/btn/Btn";
 import './notification.scss';
 import { Container, Row, Col, Card, Form, Button, Pagination } from "react-bootstrap";
 import comments from "../../resources/comments.json";
+import Axios from "axios";
 
 class Notification extends Component {
+
+    state = {
+        node: "",
+        photos: []
+    }
+
+    componentDidMount() {
+        Axios.get('https://find-pet-app.herokuapp.com/rest/announcement/' + this.props.id)
+        .then((response) => {
+            this.setState({
+                node: response.data,
+                photos: response.data.photoURL
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     render() {
-
-        const node = this.props;
-
         const commentsList = comments.comments;
-
+        const node = this.state.node;
         let active = 2;
         let items = [];
         for (let number = 1; number <= 5; number++) {
@@ -20,29 +37,27 @@ class Notification extends Component {
                 </Pagination.Item>,
             );
         }
-
+        console.log(this.state.photos.length);
         const paginationBasic = (
             <div className="pagination">
               <Pagination>{items}</Pagination>
             </div>
         );
-
         let type = node.animalType;
         let src;
-        if(type == "pies") src = "/images/dog.svg";
-        else if(type == "kot") src = "/images/cat.svg";
-        else if(type == "mysz") src = "/images/mouse.svg";
-        else if(type == "papuga") src = "/images/parrot.svg";
-        else if(type == "królik") src = "/images/bunny.svg";
+        if(type === "pies") src = "/images/dog.svg";
+        else if(type === "kot") src = "/images/cat.svg";
+        else if(type === "mysz") src = "/images/mouse.svg";
+        else if(type === "papuga") src = "/images/parrot.svg";
+        else if(type === "królik") src = "/images/bunny.svg";
         else src= "";
                 
         return (
             
-
             <Container>
                 <Row className="nodeHeader">
                     <Col xs={12} md={6} xl={12} className="nodeTitle">
-                        {src != "" &&
+                        {src !== "" &&
                             <img src={src} alt={type} />
                         }
                         <h1>{node.title}</h1>
@@ -60,7 +75,7 @@ class Notification extends Component {
                                 {node.animalType}
                             </li>
                             <li>
-                                {node.color}
+                                {node.petColors}
                             </li>
                             <li>
                                 {node.status}
@@ -71,16 +86,18 @@ class Notification extends Component {
                 <Row>
                     <Col>
                         <p>
-                            {node.desc}
+                            {node.description}
                         </p>
                     </Col>
                 </Row>
                 <Row>
                     <Col className="gallery">
-                        {node.photoUrl.length > 0 && 
-                            node.photoUrl.map((image, i) => (
-                                <img key={i} src={node.photoUrl[i]} alt=""/>                     
-                            ))
+                        {
+                            this.state.photos.length > 0 && 
+                            this.state.photos.map((img, i) => { 
+                                return (
+                                <img key={i} src={img} alt=""/>                     
+                            )})
                         }
                     </Col>
                 </Row>

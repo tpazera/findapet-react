@@ -73,8 +73,11 @@ class LeafletMap extends Component {
         console.log(`longitude: ${ this.state.lng } | latitude: ${ this.state.lat }`);
     }
 
-    render() {
+    handleMoveend(ev) {
+        console.log(ev.sourceTarget.getBounds());
+    }
 
+    render() {
 
         const {
             list
@@ -114,7 +117,7 @@ class LeafletMap extends Component {
         let position = [this.state.lat, this.state.lng]
         
         return (
-            <Map center={position} zoom={this.state.zoom} id="map" maxZoom={25}>
+            <Map onMoveend={this.handleMoveend} center={position} zoom={this.state.zoom} id="map" maxZoom={25}>
                 <TileLayer
                     attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
