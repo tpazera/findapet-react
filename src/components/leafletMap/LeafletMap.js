@@ -113,15 +113,6 @@ class LeafletMap extends Component {
 
     return (
       <>
-        <button
-          onClick={() =>
-            this.saveLocationInfo({
-              coords: { latitude: 32, longitude: 32 }
-            })
-          }
-        >
-          asdsA
-        </button>
         <Map
           onMoveend={this.handleMoveend}
           center={position}
