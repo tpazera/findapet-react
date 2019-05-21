@@ -9,7 +9,11 @@ class Notification extends Component {
 
     state = {
         node: "",
-        photos: []
+        photos: [],
+        commentsLength: 0,
+        comments: [],
+        commentOnPage: 3,
+        activeCommentPage: 1
     }
 
     componentDidMount() {
@@ -17,32 +21,52 @@ class Notification extends Component {
         .then((response) => {
             this.setState({
                 node: response.data,
-                photos: response.data.photoURL
+                photos: response.data.photoURL,
+                commentsLength: response.data.comments.length
             })
+        })
+        this.getComments(this.state.activeCommentPage);
+    }
+
+    getComments(page) {
+        Axios.get('https://find-pet-app.herokuapp.com/rest/comment/announcement/' + this.props.id + '?amount=' + this.state.commentOnPage + '&offset=' + (page-1) * this.state.commentOnPage)
+        .then((response) => {
+            this.setState({
+                comments: response.data,
+                activeCommentPage: page
+            })
+            console.log(response.data)
         })
         .catch(function (error) {
             console.log(error);
         });
     }
 
+    changeCommentPage(e) {
+        console.log(e);
+        this.getComments(e);
+    }
+
     render() {
         const commentsList = comments.comments;
         const node = this.state.node;
-        let active = 2;
+
+
         let items = [];
-        for (let number = 1; number <= 5; number++) {
+        for (let number = 1; number <= Math.ceil(this.state.commentsLength/this.state.commentOnPage); number++) {
             items.push(
-                <Pagination.Item key={number} active={number === active}>
+                <Pagination.Item className={number} key={number} active={number === this.state.activeCommentPage} onClick={(e) => this.changeCommentPage(number)}>
                 {number}
                 </Pagination.Item>,
             );
         }
-        console.log(this.state.photos.length);
+        
         const paginationBasic = (
             <div className="pagination">
               <Pagination>{items}</Pagination>
             </div>
         );
+
         let type = node.animalType;
         let src;
         if(type === "pies") src = "/images/dog.svg";
@@ -103,10 +127,10 @@ class Notification extends Component {
                 </Row>
                 <Row>
                     <Col className="comments">
-                        {commentsList.map((comment) => (
-                            <Card key={comment.idcomment}>
-                                <Card.Header>{comment.user}</Card.Header>
-                                <Card.Body>{comment.text}</Card.Body>
+                        {this.state.comments.map((comment) => (
+                            <Card key={comment.id}>
+                                <Card.Header>{comment.userId}</Card.Header>
+                                <Card.Body>{comment.description}</Card.Body>
                             </Card>
                         ))}
                         {paginationBasic}
