@@ -17,7 +17,7 @@ class Notification extends Component {
             comments: [],
             commentOnPage: 3,
             activeCommentPage: 1,
-            commentValue: "asd"
+            commentValue: ""
         }
     
         this.handleChange = this.handleChange.bind(this);
@@ -61,7 +61,6 @@ class Notification extends Component {
     }
     
     handleSubmit(event) {
-        alert('Your favorite flavor is: ' + this.state.commentValue);
         Axios.post('https://find-pet-app.herokuapp.com/rest/comment/', {
             announcementId : this.props.id,
             description: this.state.commentValue,
@@ -81,7 +80,6 @@ class Notification extends Component {
     }
 
     render() {
-        const commentsList = comments.comments;
         const node = this.state.node;
 
 
