@@ -7,13 +7,21 @@ import Axios from "axios";
 
 class Notification extends Component {
 
-    state = {
-        node: "",
-        photos: [],
-        commentsLength: 0,
-        comments: [],
-        commentOnPage: 3,
-        activeCommentPage: 1
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            node: "",
+            photos: [],
+            commentsLength: 0,
+            comments: [],
+            commentOnPage: 3,
+            activeCommentPage: 1,
+            commentValue: "asd"
+        }
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -45,6 +53,16 @@ class Notification extends Component {
     changeCommentPage(e) {
         console.log(e);
         this.getComments(e);
+    }
+
+    handleChange(event) {
+        this.setState({commentValue: event.target.value});
+        // console.log(event.target.value);
+    }
+    
+    handleSubmit(event) {
+        alert('Your favorite flavor is: ' + this.state.commentValue);
+        event.preventDefault();
     }
 
     render() {
@@ -135,11 +153,12 @@ class Notification extends Component {
                         ))}
                         {paginationBasic}
                         <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Control as="textarea" rows="3" />
+                            <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
                             Dodaj komentarz
                         </Button>
+
                     </Col>
                 </Row>
 
