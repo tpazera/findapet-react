@@ -137,7 +137,7 @@ class LeafletMap extends Component {
               others.map(node => (
                 <Marker
                   key={node.id}
-                  position={[node.lat, node.lng]}
+                  position={[node.latitude, node.longitude]}
                   icon={defaultMarker}
                 >
                   <Popup>
@@ -150,7 +150,7 @@ class LeafletMap extends Component {
               dogs.map(node => (
                 <Marker
                   key={node.id}
-                  position={[node.lat, node.lng]}
+                  position={[node.latitude, node.longitude]}
                   icon={dogMarker}
                 >
                   <Popup>
@@ -163,7 +163,7 @@ class LeafletMap extends Component {
               cats.map(node => (
                 <Marker
                   key={node.id}
-                  position={[node.lat, node.lng]}
+                  position={[node.latitude, node.longitude]}
                   icon={catMarker}
                 >
                   <Popup>
@@ -176,7 +176,7 @@ class LeafletMap extends Component {
               bunnies.map(node => (
                 <Marker
                   key={node.id}
-                  position={[node.lat, node.lng]}
+                  position={[node.latitude, node.longitude]}
                   icon={bunnyMarker}
                 >
                   <Popup>
@@ -189,7 +189,7 @@ class LeafletMap extends Component {
               mouses.map(node => (
                 <Marker
                   key={node.id}
-                  position={[node.lat, node.lng]}
+                  position={[node.latitude, node.longitude]}
                   icon={mouseMarker}
                 >
                   <Popup>
@@ -202,7 +202,7 @@ class LeafletMap extends Component {
               parrots.map(node => (
                 <Marker
                   key={node.id}
-                  position={[node.lat, node.lng]}
+                  position={[node.latitude, node.longitude]}
                   icon={parrotMarker}
                 >
                   <Popup>
