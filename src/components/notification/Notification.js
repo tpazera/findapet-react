@@ -62,6 +62,21 @@ class Notification extends Component {
     
     handleSubmit(event) {
         alert('Your favorite flavor is: ' + this.state.commentValue);
+        Axios.post('https://find-pet-app.herokuapp.com/rest/comment/', {
+            announcementId : this.props.id,
+            description: this.state.commentValue,
+            userId: 134
+        }, {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+                "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b21layIsInNjb3BlcyI6WyJVU0VSIl0sImV4cCI6MTU1OTg1MzMxM30.svAwT0n7VkVQDjkdU1mMao1eyCB_qNzI3C6TrZg3TO4p2jCURCLwnAxCxpB20Z4NYLe4iprsEcOBfpscMYCjAQ"
+            }
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        this.getComments(this.state.activeCommentPage);
         event.preventDefault();
     }
 
