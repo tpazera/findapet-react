@@ -1,19 +1,52 @@
 import React, { Component } from "react";
 import Btn from "../../components/btn/Btn";
-import './notification.scss';
-import { Container, Row, Col, Card, Form, Button, Pagination } from "react-bootstrap";
+import "./notification.scss";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Pagination
+} from "react-bootstrap";
 import comments from "../../resources/comments.json";
 import Axios from "axios";
 
 class Notification extends Component {
+  state = {
+    node: "",
+    photos: []
+  };
 
-    state = {
-        node: "",
-        photos: [],
-        commentsLength: 0,
-        comments: [],
-        commentOnPage: 3,
-        activeCommentPage: 1
+  componentWillReceiveProps(newProps) {
+    if (newProps.id !== this.props.id) {
+      Axios.get(
+        "https://find-pet-app.herokuapp.com/rest/announcement/" + this.props.id
+      )
+        .then(response => {
+          this.setState({
+            node: response.data,
+            photos: response.data.photoURL
+          });
+      })
+    }
+    
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            node: "",
+            photos: [],
+            commentsLength: 0,
+            comments: [],
+            commentOnPage: 3,
+            activeCommentPage: 1,
+            commentValue: ""
+        }
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -37,18 +70,42 @@ class Notification extends Component {
             })
             console.log(response.data)
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(function(error) {
+          console.log(error);
         });
     }
+  }
 
     changeCommentPage(e) {
         console.log(e);
         this.getComments(e);
     }
 
+    handleChange(event) {
+        this.setState({commentValue: event.target.value});
+        // console.log(event.target.value);
+    }
+    
+    handleSubmit(event) {
+        Axios.post('https://find-pet-app.herokuapp.com/rest/comment/', {
+            announcementId : this.props.id,
+            description: this.state.commentValue,
+            userId: 134
+        }, {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+                "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b21layIsInNjb3BlcyI6WyJVU0VSIl0sImV4cCI6MTU1OTg1MzMxM30.svAwT0n7VkVQDjkdU1mMao1eyCB_qNzI3C6TrZg3TO4p2jCURCLwnAxCxpB20Z4NYLe4iprsEcOBfpscMYCjAQ"
+            }
+        })
+        .then((response) => {
+            console.log(response);
+        })
+        this.getComments(this.state.activeCommentPage);
+        event.preventDefault();
+    }
+
     render() {
-        const commentsList = comments.comments;
         const node = this.state.node;
 
 
@@ -135,17 +192,19 @@ class Notification extends Component {
                         ))}
                         {paginationBasic}
                         <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Control as="textarea" rows="3" />
+                            <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
                             Dodaj komentarz
                         </Button>
+
                     </Col>
                 </Row>
 
             </Container>
         );
     }
+  }
 }
 
 export default Notification;

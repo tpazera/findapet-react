@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import "./sortBar.scss"
 import { Col, Form, Button } from 'react-bootstrap';
-import lists from "../../resources/lists.json";
 import axios from 'axios';
+import { connect } from "react-redux";
+import { addFilters } from "../../modules/store/actions/filters";
 
-class PetInfo extends Component {
+class SortBar extends Component {
 
     state = {
         colors: [],
         status: [],
         types: [],
+        activeColor: 'all',
+        activeType: 'all',
+        activeStatus: 'all',
     }
 
     componentDidMount() {
@@ -30,6 +34,25 @@ class PetInfo extends Component {
             })
     }
 
+    change(select, e) {
+        switch (select) {
+            case 'color':
+                this.setState({activeColor: e.target.value});
+                this.props.addFilters(e.target.value, this.state.activeType, this.state.activeStatus);
+                return;
+            case 'type':
+                this.setState({activeType: e.target.value});
+                this.props.addFilters(this.state.activeColor, e.target.value, this.state.activeStatus);
+                return;
+            case 'status':
+                this.setState({activeStatus: e.target.value});
+                this.props.addFilters(this.state.activeColor, this.state.activeType, e.target.value);
+                return;
+            default:
+                return;
+        }
+    }
+
     render() {
 
         return (
@@ -37,43 +60,56 @@ class PetInfo extends Component {
                 <Form.Row>
                     <Form.Group as={Col} controlId="selectColor">
                     <Form.Label>Kolor</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control as="select" onChange={(e) => this.change('color', e)} value={this.state.value}>
+                        <option value='all' key='allcolors'>wszystkie</option>
                         {this.state.colors.map((item,i) => (
-                            <option key={item + i}>{item}</option>
+                            <option value={item} key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="selectType">
                     <Form.Label>Typ</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control as="select" onChange={(e) => this.change('type', e)} value={this.state.value}>
+                        <option value='all' key='alltypes'>wszystkie</option>
                         {this.state.types.map((item,i) => (
-                            <option key={item + i}>{item}</option>
+                            <option value={item} key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
                     </Form.Group>                    
                     
                     <Form.Group as={Col} controlId="selectStatus">
                     <Form.Label>Status</Form.Label>
-                    <Form.Control as="select">
+                    <Form.Control as="select" onChange={(e) => this.change('status', e)} value={this.state.value}>
+                        <option value='all' key='allstatuses'>wszystkie</option>
                         {this.state.status.map((item,i) => (
-                            <option key={item + i}>{item}</option>
+                            <option value={item} key={item + i}>{item}</option>
                         ))}
                     </Form.Control>
                     </Form.Group>
 
                 </Form.Row>
-                <Form.Row>
+                {/* <Form.Row>
                     <Form.Group as={Col} controlId="formGridState">
                     <Button variant="primary" type="submit">
                         Sortuj
                     </Button>
                     </Form.Group>
 
-                </Form.Row>
+                </Form.Row> */}
             </div>
         );
     }
 }
 
-export default PetInfo;
+const mapDispatchToProps = dispatch => ({
+        addFilters: (color, type, status) =>
+        dispatch(addFilters(color, type, status))
+    });
+  
+export default connect(
+    null,
+    mapDispatchToProps
+)(SortBar);
+  
+// export default PetInfo;

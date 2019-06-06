@@ -27,26 +27,33 @@ class LoginForm extends Component {
   };
 
   onFormSubmit = () => {
-    axios.post('https://find-pet-app.herokuapp.com/auth', {
-      login: this.state.login,
-      password: this.state.password
-    })
-    .then((response) => {
-      this.setState({ 
-        token : response.data.Authorization,
-        id : response.data.id
+    axios
+      .post("https://find-pet-app.herokuapp.com/auth", {
+        login: this.state.login,
+        password: this.state.password
+      })
+      .then(response => {
+        this.setState({
+          token: response.data.Authorization,
+          id: response.data.id
+        });
+        localStorage.setItem("token", response.data.Authorization);
+        Alert.success("Zalogowano", {
+          position: "bottom-left",
+          effect: "slide",
+          timeout: 5000
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch(error => {
+        Alert.error("Niepoprawne dane", {
+          position: "bottom-left",
+          effect: "slide",
+          timeout: 5000
+        });
       });
-      this.props.closeModal('Zalogowano');
-    })
-    .catch(function (error) {
-      // if (error.response.status === 403) {
-      //   // this.props.closeModal();
-      // } else {
-      //   console.log('test');
-      //   // this.props.closeModal();
-      //   // this.props.loginError("Wystąpił błąd logowania!");
-      // }
-    });
   };
 
   render() {

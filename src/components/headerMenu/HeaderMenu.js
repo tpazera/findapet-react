@@ -47,6 +47,11 @@ class HeaderMenu extends Component {
   }
 
 
+  logout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   render() {
     const { isLoginOpen, isRegisterOpen } = this.state;
     return (
@@ -71,6 +76,7 @@ class HeaderMenu extends Component {
           
           />
         </Modal>
+
         <Nav className="ml-auto" id="headerMenu">
           <Nav.Link onClick={() => this.toggleModal("isRegisterOpen")}>
             Rejestracja
@@ -80,6 +86,27 @@ class HeaderMenu extends Component {
             Logowanie
             <FontAwesomeIcon icon="user" />
           </Nav.Link>
+
+          {localStorage.getItem("token") ? (
+            <>
+              <Nav.Link onClick={() => this.logout()}>
+                Logout
+                <FontAwesomeIcon icon="users" />
+              </Nav.Link>
+            </>
+          ) : (
+            <>
+              <Nav.Link onClick={() => this.toggleModal("isRegisterOpen")}>
+                Rejestracja
+                <FontAwesomeIcon icon="users" />
+              </Nav.Link>
+              <Nav.Link onClick={() => this.toggleModal("isLoginOpen")}>
+                Logowanie
+                <FontAwesomeIcon icon="user" />
+                {/* pojecia nie mam czemu sa inne wielkosci ikonek */}
+              </Nav.Link>
+            </>
+          )}
         </Nav>
       </>
     );
