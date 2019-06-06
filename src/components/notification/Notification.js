@@ -1,12 +1,37 @@
 import React, { Component } from "react";
 import Btn from "../../components/btn/Btn";
-import './notification.scss';
-import { Container, Row, Col, Card, Form, Button, Pagination } from "react-bootstrap";
+import "./notification.scss";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Pagination
+} from "react-bootstrap";
 import comments from "../../resources/comments.json";
 import Axios from "axios";
 
 class Notification extends Component {
+  state = {
+    node: "",
+    photos: []
+  };
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.id !== this.props.id) {
+      Axios.get(
+        "https://find-pet-app.herokuapp.com/rest/announcement/" + this.props.id
+      )
+        .then(response => {
+          this.setState({
+            node: response.data,
+            photos: response.data.photoURL
+          });
+      })
+    }
+    
     constructor(props) {
         super(props);
     
@@ -45,10 +70,11 @@ class Notification extends Component {
             })
             console.log(response.data)
         })
-        .catch(function (error) {
-            console.log(error);
+        .catch(function(error) {
+          console.log(error);
         });
     }
+  }
 
     changeCommentPage(e) {
         console.log(e);
@@ -178,6 +204,7 @@ class Notification extends Component {
             </Container>
         );
     }
+  }
 }
 
 export default Notification;

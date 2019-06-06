@@ -21,28 +21,37 @@ class LoginForm extends Component {
   };
 
   onPasswordChange = e => {
-    this.setState({ login: e.target.value });
+    this.setState({ password: e.target.value });
   };
 
   onFormSubmit = () => {
-    axios.post('https://find-pet-app.herokuapp.com/auth', {
-      login: 'tomek',
-      password: 'golicipke'
-    })
-    .then((response) => {
-      this.setState({ 
-        token : response.data.Authorization,
-        id : response.data.id
+    axios
+      .post("https://find-pet-app.herokuapp.com/auth", {
+        login: this.state.login,
+        password: this.state.password
+      })
+      .then(response => {
+        this.setState({
+          token: response.data.Authorization,
+          id: response.data.id
+        });
+        localStorage.setItem("token", response.data.Authorization);
+        Alert.success("Zalogowano", {
+          position: "bottom-left",
+          effect: "slide",
+          timeout: 5000
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch(error => {
+        Alert.error("Niepoprawne dane", {
+          position: "bottom-left",
+          effect: "slide",
+          timeout: 5000
+        });
       });
-      Alert.success("Zalogowano", {
-        position: "bottom-left",
-        effect: "slide",
-        timeout: 5000
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
   };
 
   render() {
