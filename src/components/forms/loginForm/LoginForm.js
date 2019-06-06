@@ -6,49 +6,53 @@ import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./loginForm.scss";
 
-import Modal from "../../modal/Modal";
-
 class LoginForm extends Component {
-  state = {
-    login: "",
-    password: "",
-    id: "",
-    token: ""
-  };
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: "",
+      password: "",
+      id: "",
+      token: ""
+    };
+  }
 
   onLoginChange = e => {
     this.setState({ login: e.target.value });
   };
 
   onPasswordChange = e => {
-    this.setState({ login: e.target.value });
+    this.setState({ password: e.target.value });
   };
 
   onFormSubmit = () => {
     axios.post('https://find-pet-app.herokuapp.com/auth', {
-      login: 'tomek',
-      password: 'golicipke'
+      login: this.state.login,
+      password: this.state.password
     })
     .then((response) => {
       this.setState({ 
         token : response.data.Authorization,
         id : response.data.id
       });
-      Alert.success("Zalogowano", {
-        position: "bottom-left",
-        effect: "slide",
-        timeout: 5000
-      });
+      this.props.closeModal('Zalogowano');
     })
     .catch(function (error) {
-      console.log(error);
+      // if (error.response.status === 403) {
+      //   // this.props.closeModal();
+      // } else {
+      //   console.log('test');
+      //   // this.props.closeModal();
+      //   // this.props.loginError("Wystąpił błąd logowania!");
+      // }
     });
   };
 
   render() {
     return (
       <>
-        <Alert />
+        <Alert show={this.state.showModal}/>
         <Form.Group controlId="formBasicLogin">
           <Form.Label>Nazwa użytkownika</Form.Label>
           <Form.Control
