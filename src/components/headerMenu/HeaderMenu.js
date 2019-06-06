@@ -8,17 +8,44 @@ import "./headerMenu.scss";
 import LoginForm from "../forms/loginForm/LoginForm";
 import RegisterForm from "../forms/registerForm/RegisterForm";
 import Modal from "../modal/Modal";
+import Alert from "react-s-alert";
 
 library.add(faUser, faUsers);
 
 class HeaderMenu extends Component {
   state = {
     isLoginOpen: false,
-    isRegisterOpen: false
+    isRegisterOpen: false,
+    closeModal: false
   };
 
   toggleModal = type =>
     this.setState(prevState => ({ [type]: !prevState[type] }));
+    
+  componentDidUpdate() {
+    console.log(this.state.closeModal)
+    if(this.state.closeModal == true) {
+      Alert.success('Zalogowano', {
+        position: "bottom-left",
+        effect: "slide",
+        timeout: 5000
+      });
+    }
+  }
+
+  closeModal() {
+    this.setState({
+      isLoginOpen: false,
+      closeModal: true
+    })
+    console.log('test');
+    // Alert.success('Zalogowano', {
+    //   position: "bottom-left",
+    //   effect: "slide",
+    //   timeout: 5000
+    // });
+  }
+
 
   logout = () => {
     localStorage.removeItem("token");
@@ -35,7 +62,9 @@ class HeaderMenu extends Component {
           type="isLoginOpen"
           title="Zaloguj się"
         >
-          <LoginForm />
+          <LoginForm 
+            closeModal={() => this.closeModal()}
+          />
         </Modal>
         <Modal
           toggleModal={this.toggleModal}
@@ -43,10 +72,21 @@ class HeaderMenu extends Component {
           type="isRegisterOpen"
           title="Zarejestruj się"
         >
-          <RegisterForm />
+          <RegisterForm 
+          
+          />
         </Modal>
 
         <Nav className="ml-auto" id="headerMenu">
+          <Nav.Link onClick={() => this.toggleModal("isRegisterOpen")}>
+            Rejestracja
+            <FontAwesomeIcon icon="users" />
+          </Nav.Link>
+          <Nav.Link onClick={() => this.toggleModal("isLoginOpen")}>
+            Logowanie
+            <FontAwesomeIcon icon="user" />
+          </Nav.Link>
+
           {localStorage.getItem("token") ? (
             <>
               <Nav.Link onClick={() => this.logout()}>

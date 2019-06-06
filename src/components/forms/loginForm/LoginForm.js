@@ -6,15 +6,17 @@ import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./loginForm.scss";
 
-import Modal from "../../modal/Modal";
-
 class LoginForm extends Component {
-  state = {
-    login: "",
-    password: "",
-    id: "",
-    token: ""
-  };
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      login: "",
+      password: "",
+      id: "",
+      token: ""
+    };
+  }
 
   onLoginChange = e => {
     this.setState({ login: e.target.value });
@@ -57,7 +59,7 @@ class LoginForm extends Component {
   render() {
     return (
       <>
-        <Alert />
+        <Alert show={this.state.showModal}/>
         <Form.Group controlId="formBasicLogin">
           <Form.Label>Nazwa użytkownika</Form.Label>
           <Form.Control
