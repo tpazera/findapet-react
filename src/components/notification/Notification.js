@@ -19,17 +19,18 @@ class Notification extends Component {
     photos: []
   };
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.id !== this.props.id) {
-      Axios.get(
-        "https://find-pet-app.herokuapp.com/rest/announcement/" + this.props.id
-      )
-        .then(response => {
-          this.setState({
-            node: response.data,
-            photos: response.data.photoURL
-          });
-      })
+    componentWillReceiveProps(newProps) {
+        if (newProps.id !== this.props.id) {
+        Axios.get(
+            "https://find-pet-app.herokuapp.com/rest/announcement/" + this.props.id
+        )
+            .then(response => {
+            this.setState({
+                node: response.data,
+                photos: response.data.photoURL
+            });
+        })
+        }
     }
     
     constructor(props) {
@@ -74,7 +75,7 @@ class Notification extends Component {
           console.log(error);
         });
     }
-  }
+  
 
     changeCommentPage(e) {
         console.log(e);
@@ -204,7 +205,6 @@ class Notification extends Component {
             </Container>
         );
     }
-  }
 }
 
 export default Notification;
