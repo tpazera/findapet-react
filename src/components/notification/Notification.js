@@ -74,6 +74,16 @@ class Notification extends Component {
         .catch(function(error) {
           console.log(error);
         });
+        Axios.get('https://find-pet-app.herokuapp.com/rest/comment/' + this.props.id + '/amount')
+        .then((response) => {
+            this.setState({
+                commentsLength: response.data
+            })
+            console.log(response.data)
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   
 
@@ -184,22 +194,41 @@ class Notification extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col className="comments">
-                        {this.state.comments.map((comment) => (
-                            <Card key={comment.id}>
-                                <Card.Header>{comment.userId}</Card.Header>
-                                <Card.Body>{comment.description}</Card.Body>
-                            </Card>
-                        ))}
-                        {paginationBasic}
-                        <Form.Group controlId="exampleForm.ControlTextarea1">
-                            <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
-                        </Form.Group>
-                        <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                            Dodaj komentarz
-                        </Button>
+                    <div className="card">
+                        <div className="card-header">
+                            Komentarze
+                        </div>
+                        <div className="panel-body">
+                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                                <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
+                            </Form.Group>
+                            <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                                Dodaj komentarz
+                            </Button>
+                            <div className="clearfix"></div>
+                            <hr />
+                            <ul className="media-list">
+                                {this.state.comments.map((comment) => (
+                                    <li className="media">
+                                        <a href="#" className="pull-left">
+                                            <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle" />
+                                        </a>
+                                        <div className="media-body">
+                                            <strong className="text-success">@{comment.userName}</strong>
+                                            <span className="text-muted pull-right">
+                                                <small className="text-muted">{comment.date.replace('T', ' ').substring(0, comment.date.lastIndexOf(':'))}</small>
+                                            </span>
+                                            <p>
+                                                {comment.description}
+                                            </p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
 
-                    </Col>
+                            {paginationBasic}
+                        </div>
+                    </div>
                 </Row>
 
             </Container>
