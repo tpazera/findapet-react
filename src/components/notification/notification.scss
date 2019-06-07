@@ -73,3 +73,36 @@
     }
 }
                                                                                          
+body{margin-top:20px;}
+
+.card {
+    margin-top: 50px;
+    width: 100%;
+    textarea {
+        width: 100%
+    }
+}
+
+.panel-body {
+    padding: 10px;
+    ul {
+        padding-left: 0;
+    }
+    img {
+        border-radius: 50%;
+        padding-right: 10px;
+    }
+    .media {
+        margin-bottom: 20px;
+    }
+    .pagination {
+        margin: 10px auto;
+    }
+    span {
+        display: block;
+        float: right;
+    }
+    p {
+        clear: both;
+    }
+}
