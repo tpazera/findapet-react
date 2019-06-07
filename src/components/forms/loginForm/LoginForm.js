@@ -38,6 +38,7 @@ class LoginForm extends Component {
           id: response.data.id
         });
         localStorage.setItem("token", response.data.Authorization);
+        localStorage.setItem("id", response.data.id);
         Alert.success("Zalogowano", {
           position: "bottom-left",
           effect: "slide",
