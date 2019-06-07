@@ -3,21 +3,34 @@ import PageWrapper from "../../components/pageWrapper/PageWrapper";
 import SidebarMenu from "../../components/sidebarMenu/SidebarMenu";
 import PageContent from "../../components/pageContent/PageContent";
 import NodeList from "../../components/nodeList/NodeList";
-import nodes from "../../resources/data.json";
+import Axios from "axios";
 
 class UserNodesPage extends Component {
-    render() {
 
-        let list = nodes.nodeList.filter(
-            item => item.userid === 1
-        ); 
+    state = {
+        list: ""
+    };
+    
+    componentDidMount() {
+        Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
+            .then(response => {
+                const newlist = response.data.filter(
+                    item => item.userId === localStorage.getItem('id')
+                )
+                this.setState({ list : newlist });
+            })
+            .catch(function(error) {
+            });
+    }
+
+    render() {
+ 
 
         return (
             <PageWrapper>
-                {console.log(list)}
                 <SidebarMenu />
                 <PageContent>
-                    <NodeList list={list} />
+                    <NodeList list={this.state.list} />
                 </PageContent>
             </PageWrapper>
         );
