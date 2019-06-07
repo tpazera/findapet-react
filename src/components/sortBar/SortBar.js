@@ -4,6 +4,13 @@ import { Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { connect } from "react-redux";
 import { addFilters } from "../../modules/store/actions/filters";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faSortAmountUp
+  } from "@fortawesome/free-solid-svg-icons";
+import { library } from "@fortawesome/fontawesome-svg-core";
+
+library.add(faSortAmountUp);
 
 class SortBar extends Component {
 
@@ -56,7 +63,8 @@ class SortBar extends Component {
     render() {
 
         return (
-            <div>
+            <div id="sortbar">
+                <h1><FontAwesomeIcon icon="sort-amount-up" />Sortuj ogłoszenia</h1>
                 <Form.Row>
                     <Form.Group as={Col} controlId="selectColor">
                     <Form.Label>Kolor</Form.Label>

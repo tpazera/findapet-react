@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PageWrapper from "../../components/pageWrapper/PageWrapper";
-import SidebarMenu from "../../components/sidebarMenu/SidebarMenu";
+import FunctionMenu from "../../components/functionMenu/FunctionMenu";
 import PageContent from "../../components/pageContent/PageContent";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,7 +12,7 @@ class ErrorPage extends Component {
     render() {
         return (
             <PageWrapper>
-                <SidebarMenu />
+                <FunctionMenu />
                 <div className="errorPageContent">
                     <PageContent>
                         <FontAwesomeIcon icon="exclamation-triangle" />

@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 import Logo from '../logo/Logo';
 import "./header.scss";
-import HeaderMenu from '../headerMenu/HeaderMenu';
+import AccountMenu from '../accountMenu/AccountMenu';
 
 const Header = () => {
     return (
@@ -13,7 +13,7 @@ const Header = () => {
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="menuHeader" />
                 <Navbar.Collapse id="menuHeader">
-                    <HeaderMenu />
+                    <AccountMenu />
                 </Navbar.Collapse>
             </Navbar>
         </Container>

@@ -10,8 +10,8 @@ import {
   Button,
   Pagination
 } from "react-bootstrap";
-import comments from "../../resources/comments.json";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 class Notification extends Component {
   state = {
@@ -101,12 +101,12 @@ class Notification extends Component {
         Axios.post('https://find-pet-app.herokuapp.com/rest/comment/', {
             announcementId : this.props.id,
             description: this.state.commentValue,
-            userId: 134
+            userId: localStorage.getItem("id")
         }, {
             headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 "Access-Control-Allow-Origin": "*",
-                "Authorization":"Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0b21layIsInNjb3BlcyI6WyJVU0VSIl0sImV4cCI6MTU1OTg1MzMxM30.svAwT0n7VkVQDjkdU1mMao1eyCB_qNzI3C6TrZg3TO4p2jCURCLwnAxCxpB20Z4NYLe4iprsEcOBfpscMYCjAQ"
+                "Authorization":localStorage.getItem('token')
             }
         })
         .then((response) => {
@@ -115,6 +115,9 @@ class Notification extends Component {
         this.getComments(this.state.activeCommentPage);
         event.preventDefault();
     }
+
+
+
 
     render() {
         const node = this.state.node;
@@ -143,41 +146,54 @@ class Notification extends Component {
         else if(type === "papuga") src = "/images/parrot.svg";
         else if(type === "królik") src = "/images/bunny.svg";
         else src= "";
+
+        let lnk = "/user/" + node.userId;
+        let ifowner = false;
+        if (localStorage.getItem("id") == node.userId) ifowner = true;
                 
         return (
             
-            <Container>
+            <Container id="notification">
                 <Row className="nodeHeader">
-                    <Col xs={12} md={6} xl={12} className="nodeTitle">
+                    <Col xs={12} md={12} xl={12} className="nodeTitle">
                         {src !== "" &&
                             <img src={src} alt={type} />
                         }
                         <h1>{node.title}</h1>
                     </Col>
-                    <Col xs={12} md={6} xl={12} className="nodeButtons">
-                        <Btn text="zgłoś" variant="danger" />
-                        <Btn text="kontakt" variant="success" />
-                        <Btn text="..." variant="primary" />
+                    <Col xs={12} md={12} xl={12} className="nodeButtons">
+                        {localStorage.getItem("token") ? (
+                            <>
+                                <Btn onClick={this.reportNode} text="zgłoś" variant="warning" />
+                                <Link to={lnk}><Btn text="kontakt" variant="success" /></Link>
+                            </>
+                        ) : ( <></> )}
+                        {ifowner ? (
+                            <>
+                                <Btn onClick={this.deleteNode} text="Usuń" variant="danger" />
+                            </>
+                        ) : ( <></> )}
+                        
                     </Col>
                 </Row>
                 <Row>
                     <Col>
                         <ul className="nodeInfoList">
                             <li>
-                                {node.animalType}
+                                <strong>Gatunek: </strong>{node.animalType}
                             </li>
                             <li>
-                                {node.petColors}
+                                <strong>Kolor: </strong>{node.petColors}
                             </li>
                             <li>
-                                {node.status}
+                                <strong>Status: </strong>{node.status}
                             </li>
                         </ul>
                     </Col>
                 </Row>
                 <Row>
                     <Col>
-                        <p>
+                        <p className="nodeDescription">
                             {node.description}
                         </p>
                     </Col>
@@ -199,14 +215,18 @@ class Notification extends Component {
                             Komentarze
                         </div>
                         <div className="panel-body">
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
-                                <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
-                            </Form.Group>
-                            <Button variant="primary" type="submit" onClick={this.handleSubmit}>
-                                Dodaj komentarz
-                            </Button>
-                            <div className="clearfix"></div>
-                            <hr />
+                            {localStorage.getItem("token") ? (
+                                <>
+                                    <Form.Group controlId="exampleForm.ControlTextarea1">
+                                        <Form.Control as="textarea" rows="3" onChange={this.handleChange} />
+                                    </Form.Group>
+                                    <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                                        Dodaj komentarz
+                                    </Button>
+                                    <div className="clearfix"></div>
+                                    <hr />
+                                </>
+                            ) : ( <></> )}
                             <ul className="media-list">
                                 {this.state.comments.map((comment) => (
                                     <li className="media">
@@ -214,7 +234,7 @@ class Notification extends Component {
                                             <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle" />
                                         </a>
                                         <div className="media-body">
-                                            <strong className="text-success">@{comment.userName}</strong>
+                                            <Link to={"/user/" + comment.userId}><strong>@{comment.userName}</strong></Link>
                                             <span className="text-muted pull-right">
                                                 <small className="text-muted">{comment.date.replace('T', ' ').substring(0, comment.date.lastIndexOf(':'))}</small>
                                             </span>

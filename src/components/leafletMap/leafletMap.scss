@@ -3,21 +3,23 @@
 @import '~react-leaflet-markercluster/dist/styles.min.css'; // sass
 
 #map {
-    height: calc(100vh - 126px);
+    height: 100vh;
     float: right;
-    width: 50%;
+    width: 100%;
     min-height: 340px;
+    z-index: 5;
+    position: absolute;
 }
 
-@media (min-width: $mapBreakpoint) {
-    #map {
-        visibility: visible !important;
-    }
-}
+// @media (min-width: $mapBreakpoint) {
+//     #map {
+//         visibility: visible !important;
+//     }
+// }
 
-@media (max-width: $mapBreakpoint) {
-    #map {
-        width: 100%;
-        visibility: hidden;
-    }
-}
+// @media (max-width: $mapBreakpoint) {
+//     #map {
+//         width: 100%;
+//         visibility: hidden;
+//     }
+// }

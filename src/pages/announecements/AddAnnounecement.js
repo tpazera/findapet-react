@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import PageWrapper from "../../components/pageWrapper/PageWrapper";
-import SidebarMenu from "../../components/sidebarMenu/SidebarMenu";
+import Sidebar from "../../components/sidebar/Sidebar";
 import PageContent from "../../components/pageContent/PageContent";
 import AddAnnouncementForm from "../../components/forms/addAnnouncement/AddAnnouncementForm";
 
@@ -14,7 +14,7 @@ class AddAnnounecement extends Component {
   render() {
     return (
       <PageWrapper>
-        <SidebarMenu />
+        <Sidebar />
         <PageContent>
           <AddAnnouncementForm />
         </PageContent>
