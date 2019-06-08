@@ -96,7 +96,7 @@ class LoginForm extends Component {
           variant="primary"
           onClick={this.onFormSubmit}
         >
-          SUBMIT
+          Zaloguj
         </Button>
       </>
     );

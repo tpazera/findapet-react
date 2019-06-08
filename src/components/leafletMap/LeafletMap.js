@@ -60,7 +60,7 @@ class LeafletMap extends Component {
       lng: -0.09,
       zoom: 13
     };
-    
+    this.saveLocationInfo = this.saveLocationInfo.bind(this);
   }
 
   componentWillMount() {
@@ -74,7 +74,6 @@ class LeafletMap extends Component {
   componentWillReceiveProps(newProps) {
     
     if (newProps.newcoords.lat2 && newProps.newcoords.lng2) {
-      console.log("new position: " + newProps.newcoords.lat2 + " " + newProps.newcoords.lng2);
       this.setState = {
         lat: newProps.newcoords.lat2,
         lng: newProps.newcoords.lng2,
@@ -90,8 +89,6 @@ class LeafletMap extends Component {
       lat: latitude,
       zoom: 13
     });
-
-    // console.log(`longitude: ${this.state.lng} | latitude: ${this.state.lat}`);
   }
 
   handleMoveend = ev => {
@@ -137,12 +134,12 @@ class LeafletMap extends Component {
     const isListNotEmpty = list && list.length > 0;
 
     let position = [this.state.lat, this.state.lng];
-    console.log(position);
 
     return (
       <>
         <Map
           onMoveend={this.handleMoveend}
+          load={this.handleMoveend}
           onClick={this.handleMapClick}
           center={[this.state.lat, this.state.lng]}
           zoom={this.state.zoom}

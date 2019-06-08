@@ -18,7 +18,6 @@ class Main extends React.Component {
       .get("https://find-pet-app.herokuapp.com/rest/announcement/all")
       .then(response => {
         const list = response.data;
-        console.log(list);
         this.setState({ list });
       })
       .catch(function(error) {

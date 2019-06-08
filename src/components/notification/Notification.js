@@ -93,7 +93,6 @@ class Notification extends Component {
 
     handleChange(event) {
         this.setState({commentValue: event.target.value});
-        // console.log(event.target.value);
     }
     
     handleSubmit(event) {
@@ -120,7 +119,6 @@ class Notification extends Component {
     }
 
     reportNode(e) {
-        console.log(this.state.node);
         Axios.post('https://find-pet-app.herokuapp.com/rest/announcement/' + this.state.node.id + '/report', {
             id : this.state.node.id
         }, {
@@ -164,17 +162,20 @@ class Notification extends Component {
 
         let type = node.animalType;
         let src;
-        if(type === "pies") src = "/images/dog.svg";
-        else if(type === "kot") src = "/images/cat.svg";
-        else if(type === "mysz") src = "/images/mouse.svg";
-        else if(type === "papuga") src = "/images/parrot.svg";
-        else if(type === "królik") src = "/images/bunny.svg";
+        if(type === "Pies") src = "/images/dog.svg";
+        else if(type === "Kot") src = "/images/cat.svg";
+        else if(type === "Mysz") src = "/images/mouse.svg";
+        else if(type === "Papuga") src = "/images/parrot.svg";
+        else if(type === "Królik") src = "/images/bunny.svg";
         else src= "";
 
         let lnk = "/user/" + node.userId;
         let ifowner = false;
         if (localStorage.getItem("id") == node.userId) ifowner = true;
         if (localStorage.getItem("admin")) ifowner = true;
+
+        console.log(this.state.photos);
+        let photos = this.state.photos;
                 
         return (
             
@@ -229,8 +230,8 @@ class Notification extends Component {
                 <Row>
                     <Col className="gallery">
                         {
-                            this.state.photos.length > 0 && 
-                            this.state.photos.map((img, i) => { 
+                            photos.length > 0 && 
+                            photos.map((img, i) => { 
                                 return (
                                 <img key={i} src={img} alt=""/>                     
                             )})
