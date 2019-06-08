@@ -40,7 +40,6 @@ class AddAnnouncementForm extends Component {
         latitude: newProps.coords.lat,
         longtitude: newProps.coords.lng
       })
-      console.log(this.state.latitude + " " + this.state.longtitude);
       document.querySelector(".latvalue").innerHTML = this.state.latitude;
       document.querySelector(".lngvalue").innerHTML = this.state.longtitude;
     }
@@ -50,6 +49,7 @@ class AddAnnouncementForm extends Component {
   onFormSubmit = () => {
 
     if (this.state.formValid) {
+      let photos = this.state.images.split('\n');
       axios.post('https://find-pet-app.herokuapp.com/rest/announcement', {
         active: true,
         animalType: this.state.type,
@@ -63,9 +63,7 @@ class AddAnnouncementForm extends Component {
         petColors: [
           this.state.color
         ],
-        photoURL: [
-          this.state.images.replace('\n',',')
-        ],
+        photoURL: photos,
         status: this.state.status,
         title: this.state.title,
         userId: localStorage.getItem('id')
@@ -95,7 +93,6 @@ class AddAnnouncementForm extends Component {
   };
 
   handleUserInput (e) {
-    console.log(this.state.status);
     const name = e.target.name;
     const value = e.target.value;
     this.setState({[name]: value}, 
@@ -122,10 +119,8 @@ class AddAnnouncementForm extends Component {
         }
         let tmp = true;
         let images = value.split('\n');
-        console.log(images);
         for (var i = 0; i < images.length; i++) {
           if(!images[i].match(/\.(jpeg|jpg|gif|png)$/)) {
-            console.log(images[i]);
             fieldValidationErrors.images = 'Błędna wartość. Jeden link na linijkę! Rozszerzenie: jpeg, jpg, gif, png';
             imagesValid = false;
             tmp = false;
@@ -204,7 +199,6 @@ class AddAnnouncementForm extends Component {
   }  
 
   validateForm() {
-    console.log(this.state.typeValid + " " + this.state.descValid + " " + this.state.latitudeValid + " " + this.state.longitudeValid + " " + this.state.colorValid + " " + this.state.statusValid + " " + this.state.imagesValid + " " + this.state.titleValid);
     this.setState({formValid: this.state.typeValid && this.state.descValid && this.state.latitudeValid && this.state.longitudeValid && this.state.colorValid && this.state.statusValid && this.state.imagesValid && this.state.titleValid});
   }
 
@@ -263,7 +257,7 @@ class AddAnnouncementForm extends Component {
         </Form.Group>
         <Form.Group controlId="formlongitude">
           <Form.Label>Lokalizacja</Form.Label>
-          <p className="locationInfo">Wciśnij dwukrotnie na punkt na mapie</p>
+          <p className="locationInfo">Wciśnij dwukrotnie punkt na mapie</p>
           <p>
             <strong>Lat: </strong> <span className="latvalue">0</span><br></br>
             <strong>Long: </strong> <span className="lngvalue">0</span>

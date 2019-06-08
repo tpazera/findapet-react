@@ -25,7 +25,6 @@ class AccountMenu extends Component {
 
     
   componentDidUpdate() {
-    console.log(this.state.closeModal)
     if(this.state.closeModal == true) {
       Alert.success('Zalogowano', {
         position: "bottom-left",
@@ -40,7 +39,6 @@ class AccountMenu extends Component {
       isLoginOpen: false,
       closeModal: true
     })
-    console.log('test');
 
   }
 

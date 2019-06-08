@@ -19,7 +19,6 @@ class NodeListPage extends Component {
     axios
       .get("https://find-pet-app.herokuapp.com/rest/announcement/all")
       .then(response => {
-        console.log(response);
         const list = response.data;
         this.setState({ list });
       })
@@ -54,7 +53,6 @@ class NodeListPage extends Component {
           req
         )
         .then(response => {
-          console.log(response);
           const list = response.data;
           this.setState({ list });
         })

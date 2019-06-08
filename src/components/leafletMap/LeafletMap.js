@@ -60,7 +60,7 @@ class LeafletMap extends Component {
       lng: -0.09,
       zoom: 13
     };
-    
+    this.saveLocationInfo = this.saveLocationInfo.bind(this);
   }
 
   componentWillMount() {
@@ -74,7 +74,6 @@ class LeafletMap extends Component {
   componentWillReceiveProps(newProps) {
     
     if (newProps.newcoords.lat2 && newProps.newcoords.lng2) {
-      console.log("new position: " + newProps.newcoords.lat2 + " " + newProps.newcoords.lng2);
       this.setState = {
         lat: newProps.newcoords.lat2,
         lng: newProps.newcoords.lng2,
@@ -90,8 +89,6 @@ class LeafletMap extends Component {
       lat: latitude,
       zoom: 13
     });
-
-    // console.log(`longitude: ${this.state.lng} | latitude: ${this.state.lat}`);
   }
 
   handleMoveend = ev => {
@@ -115,34 +112,34 @@ class LeafletMap extends Component {
   render() {
     const { list } = this.props;
 
-    let dogs = list.filter(item => item.animalType === "pies");
+    let dogs = list.filter(item => item.animalType === "Pies");
 
-    let cats = list.filter(item => item.animalType === "kot");
+    let cats = list.filter(item => item.animalType === "Kot");
 
-    let bunnies = list.filter(item => item.animalType === "królik");
+    let bunnies = list.filter(item => item.animalType === "Królik");
 
-    let mouses = list.filter(item => item.animalType === "mysz");
+    let mouses = list.filter(item => item.animalType === "Mysz");
 
-    let parrots = list.filter(item => item.animalType === "papuga");
+    let parrots = list.filter(item => item.animalType === "Papuga");
 
     let others = list.filter(
       item =>
-        item.animalType !== "pies" &&
-        item.animalType !== "kot" &&
-        item.animalType !== "mysz" &&
-        item.animalType !== "królik" &&
-        item.animalType !== "papuga"
+        item.animalType !== "Pies" &&
+        item.animalType !== "Kot" &&
+        item.animalType !== "Mysz" &&
+        item.animalType !== "Królik" &&
+        item.animalType !== "Papuga"
     );
 
     const isListNotEmpty = list && list.length > 0;
 
     let position = [this.state.lat, this.state.lng];
-    console.log(position);
 
     return (
       <>
         <Map
           onMoveend={this.handleMoveend}
+          load={this.handleMoveend}
           onClick={this.handleMapClick}
           center={[this.state.lat, this.state.lng]}
           zoom={this.state.zoom}

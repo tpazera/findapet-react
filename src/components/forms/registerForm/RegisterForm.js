@@ -140,7 +140,6 @@ class RegisterForm extends Component {
   }
   
   validateForm() {
-    console.log(this.state.emailValid + " " + this.state.passwordValid + " " + this.state.descValid + " " + this.state.phoneValid+ " " +  this.state.usernameValid);
     this.setState({formValid: this.state.emailValid && this.state.passwordValid && this.state.descValid && this.state.phoneValid && this.state.usernameValid});
   }
   
