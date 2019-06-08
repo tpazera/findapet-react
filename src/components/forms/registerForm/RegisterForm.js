@@ -35,7 +35,7 @@ class RegisterForm extends Component {
         "password": this.state.password
       };
       axios.post('find-pet-app.herokuapp.com/rest/user', {
-        userDTO: JSON.parse(dto)
+        userDTO: dto
       }, {
           headers: {
               'Content-Type': 'application/json;charset=UTF-8',
