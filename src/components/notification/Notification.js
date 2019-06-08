@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Btn from "../../components/btn/Btn";
+import ContentHeader from "../../components/contentHeader/ContentHeader";
 import "./notification.scss";
 import {
   Container,
@@ -12,15 +12,11 @@ import {
 } from "react-bootstrap";
 import Axios from "axios";
 import { Link } from "react-router-dom";
+import Alert from "react-s-alert";
 
 class Notification extends Component {
-  state = {
-    node: "",
-    photos: []
-  };
 
     componentWillReceiveProps(newProps) {
-        if (newProps.id !== this.props.id) {
         Axios.get(
             "https://find-pet-app.herokuapp.com/rest/announcement/" + this.props.id
         )
@@ -30,7 +26,6 @@ class Notification extends Component {
                 photos: response.data.photoURL
             });
         })
-        }
     }
     
     constructor(props) {
@@ -43,11 +38,13 @@ class Notification extends Component {
             comments: [],
             commentOnPage: 3,
             activeCommentPage: 1,
-            commentValue: ""
+            commentValue: "",
+            ref: 'test'
         }
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.reportNode = this.reportNode.bind(this);
     }
 
     componentDidMount() {
@@ -110,12 +107,37 @@ class Notification extends Component {
             }
         })
         .then((response) => {
-            console.log(response);
+            Alert.success("Dodano komentarz", {
+                position: "bottom-left",
+                effect: "slide",
+                timeout: 3000
+            });
         })
         this.getComments(this.state.activeCommentPage);
         event.preventDefault();
     }
 
+    reportNode(e) {
+        console.log(this.state.node);
+        Axios.post('https://find-pet-app.herokuapp.com/rest/announcement/' + this.state.node.id + '/report', {
+            id : this.state.node.id
+        }, {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+                "Authorization":localStorage.getItem('token')
+            }
+        })
+        .then((response) => {
+            Alert.error("Zgłoszono", {
+                position: "bottom-left",
+                effect: "slide",
+                timeout: 3000
+            });
+        })
+        this.getComments(this.state.activeCommentPage);
+        e.preventDefault();
+    }
 
 
 
@@ -154,23 +176,26 @@ class Notification extends Component {
         return (
             
             <Container id="notification">
+                <Alert show={this.state.showModal}/>
                 <Row className="nodeHeader">
-                    <Col xs={12} md={12} xl={12} className="nodeTitle">
-                        {src !== "" &&
+                    <ContentHeader>{src !== "" &&
                             <img src={src} alt={type} />
                         }
-                        <h1>{node.title}</h1>
+                        {node.title}
+                        </ContentHeader>
+                    <Col xs={12} md={12} xl={12} className="nodeTitle">
+                        
                     </Col>
                     <Col xs={12} md={12} xl={12} className="nodeButtons">
                         {localStorage.getItem("token") ? (
                             <>
-                                <Btn onClick={this.reportNode} text="zgłoś" variant="warning" />
-                                <Link to={lnk}><Btn text="kontakt" variant="success" /></Link>
+                                <Button onClick={this.reportNode} variant="warning">zgłoś</Button>
+                                <Link to={lnk}><Button variant="success">kontakt</Button></Link>
                             </>
                         ) : ( <></> )}
                         {ifowner ? (
                             <>
-                                <Btn onClick={this.deleteNode} text="Usuń" variant="danger" />
+                                <Button onClick={this.deleteNode} text="Usuń" variant="danger">usuń</Button>
                             </>
                         ) : ( <></> )}
                         

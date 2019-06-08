@@ -1,12 +1,10 @@
-#nodeList {
-    background-color: #ECECEC;
+#smallNodeList {
+    background-color: #fff;
     padding: 30px;
-    height: calc(100vh - 196px);
+    height: auto;
     overflow-y: scroll;
     scrollbar-color: #245DA8 rgb(225, 238, 255);
     scrollbar-width: thin;
-    display: flex;
-    flex-wrap: wrap;
     /* width */
     &::-webkit-scrollbar {
         width: 7px;

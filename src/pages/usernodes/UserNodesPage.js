@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PageWrapper from "../../components/pageWrapper/PageWrapper";
 import Sidebar from "../../components/sidebar/Sidebar";
 import PageContent from "../../components/pageContent/PageContent";
-import NodeList from "../../components/nodeList/NodeList";
+import SmallNodeList from "../../components/smallNodeList/SmallNodeList";
+import ContentHeader from "../../components/contentHeader/ContentHeader";
 import Axios from "axios";
 
 class UserNodesPage extends Component {
@@ -15,6 +16,7 @@ class UserNodesPage extends Component {
         Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
             .then(response => {
                 const newlist = response.data.filter(
+                    // item => item.userId === 1
                     item => item.userId === localStorage.getItem('id')
                 )
                 this.setState({ list : newlist });
@@ -30,7 +32,8 @@ class UserNodesPage extends Component {
             <PageWrapper>
                 <Sidebar />
                 <PageContent>
-                    <NodeList list={this.state.list} />
+                    <ContentHeader>Twoje ogłoszenia</ContentHeader>
+                    <SmallNodeList list={this.state.list} />
                 </PageContent>
             </PageWrapper>
         );

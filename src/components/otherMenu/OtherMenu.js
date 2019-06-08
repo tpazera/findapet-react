@@ -3,6 +3,7 @@ import { Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faQuestionCircle, faPhoneVolume } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 import "./otherMenu.scss";
 import LoginForm from "../forms/loginForm/LoginForm";
@@ -14,20 +15,29 @@ library.add(faQuestionCircle, faPhoneVolume);
 
 class OtherMenu extends Component {
 
+  toggleView(e) {
+    var x = document.getElementById("pageContent");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+  }
+
   render() {
     return (
       <>
         <p className='label'>Pomoc</p>
         <Nav className="ml-auto" id="headerMenu">
             <>
-              <Nav.Link>
+              <Link onClick={this.toggleView} to="#">
                 <FontAwesomeIcon icon="question-circle" />
                 <p>FAQ</p>
-              </Nav.Link>
-              <Nav.Link>
+              </Link>
+              <Link onClick={this.toggleView} to="/o-nas">
                 <FontAwesomeIcon icon="phone-volume" />
                 <p>O nas</p>
-              </Nav.Link>
+              </Link>
             </>
         </Nav>
       </>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faUsers, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
@@ -52,6 +53,15 @@ class AccountMenu extends Component {
     window.location.reload();
   };
 
+  toggleView(e) {
+    var x = document.getElementById("pageContent");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+  }
+
   render() {
     const { isLoginOpen, isRegisterOpen } = this.state;
     return (
@@ -86,6 +96,10 @@ class AccountMenu extends Component {
                 <p>Tomek Pazera</p>
               </div>
               
+              <Link onClick={this.toggleView} to={"/user/" + localStorage.getItem("id")}>
+                <FontAwesomeIcon icon="user" />
+                <p>Moje konto</p>
+              </Link>
               <Nav.Link onClick={() => this.logout()}>
                 <FontAwesomeIcon icon="sign-out-alt" />
                 <p>Wyloguj</p>

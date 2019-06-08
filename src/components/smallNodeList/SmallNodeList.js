@@ -1,8 +1,23 @@
 import React, { Component } from "react";
-import NodeCard from "../nodeCard/NodeCard";
+import SmallNodeCard from "../smallNodeCard/SmallNodeCard";
 import "./smallNodeList.scss";
 
 class SmallNodeList extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: 'test'
+    }
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState({
+      value: 'test2'
+    })
+  }
+
   render() {
     const { list } = this.props;
 
@@ -12,8 +27,8 @@ class SmallNodeList extends Component {
       <div id="smallNodeList">
         {isListNotEmpty &&
           list.map(node => (
-            <NodeCard
-              className="nodeListElement"
+            <SmallNodeCard
+              className="smallNodeListElement"
               key={node.id}
               id={node.id}
               title={node.title}
@@ -21,6 +36,8 @@ class SmallNodeList extends Component {
               animalType={node.animalType}
               status={node.status}
               color={node.petColor}
+              resetFunction={this.reset}
+              userId={node.userId}
             />
           ))}
       </div>
