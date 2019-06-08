@@ -1,0 +1,64 @@
+@import "../../index.scss";
+
+#pageContent {
+    .smallNodeListElement {
+        display: block;
+        height: auto;
+        min-height: 50px;
+        overflow:auto;
+        padding: 10px;
+        background-color: #cecece;
+        width: 100%;
+        margin-bottom: 20px;
+        .smallNodeCard {
+            background-color: #fff;
+            display: block;
+            height: 100%;
+            clear: both;
+            div {
+                display: inline-block;
+                float: left;
+            }
+            .nodeImageContainer {
+                height: 30px;
+                width: 30px;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            .nodeTitle {
+                margin-left: 15px;
+                line-height: 30px;
+                margin-bottom: 0;
+            }
+            .nodeButtons {
+                padding: 0;
+                float: right;
+                a, button {
+                    display: inline;
+                    height: 30px;
+                    width: 40px;
+                    margin: 0;
+                    padding: 0px;
+                    margin-left: 5px;
+                    svg {
+                        margin-bottom: 0 !important;
+                        height: 100%;
+                        width: auto;
+                    }
+                }
+                button {
+                    padding: 3px;
+                }
+            }
+        }
+    
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .nodeButtons {
+        width: 100%;
+        float: left;
+        margin-top: 10px;
+    }
+}

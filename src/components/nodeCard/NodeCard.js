@@ -18,32 +18,29 @@ const NodeCard = ({
     };
 
     let styles = {
-        backgroundImage: 'url(' + photoUrl + ')'
+        backgroundImage: 'url(' + photoUrl[0] + ')'
     }
+
 
     return (
         <div className={className}>
-            <div className="nodeCard">
-                <Link to={`/n/${id}`}>
-                    <div className="nodeImageContainer" style={styles}>
-                    
-                    </div>
-                </Link>
-                
-                <div className="nodeContent">
-                    <span>
-                        <Link to={`/n/${id}`} className="ProductCard__Title">
-                            {title}
-                        </Link>
+            <Link to={`/n/${id}`} className="ProductCard__Title">
+                <div className="nodeCard">
+                        <div className="nodeImageContainer" style={styles}>
                         
-                        <br />{animalType}
-                        <br />{status}
-                        <br />{color}
-                    </span>
+                        </div>
                     
+                    <div className="nodeContent">
+                        <div>
+                        <p className='titleNode'>{title}</p>
+                        <p className='typeNode'>{animalType}</p>
+                        <p className='statusNode'>{status}</p>
+                        <p className='colorNode'>{color}</p>
 
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </Link>
         </div>
     );
 };

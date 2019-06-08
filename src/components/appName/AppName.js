@@ -3,7 +3,7 @@ import './appName.scss';
 
 class AppName extends Component {
     state = { 
-        appName: "Find a Pet"
+        appName: "PawFinder"
      }
     render() {
         return (

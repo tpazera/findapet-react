@@ -1,0 +1,32 @@
+#nodeList {
+    background-color: #ECECEC;
+    padding: 30px;
+    height: calc(100vh - 184px);
+    overflow-y: scroll;
+    scrollbar-color: #245DA8 rgb(225, 238, 255);
+    scrollbar-width: thin;
+    display: flex;
+    flex-wrap: wrap;
+    /* width */
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 3px;
+    }
+  
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: rgb(225, 238, 255); 
+    }
+    
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #245DA8; 
+    }
+    
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgb(17, 77, 155); 
+    }
+
+}

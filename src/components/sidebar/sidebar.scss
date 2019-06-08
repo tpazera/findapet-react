@@ -1,0 +1,109 @@
+@import '../../index.scss';
+#sidebar {
+    float: left;
+    width: 220px;
+    background-color: $secondary;
+    min-height: 100vh;
+    color: $white;
+    z-index: 100;
+    #logo {
+        margin: 20px 20px;
+        svg {
+            color: white;
+            height: 40px;
+            width: 40px;
+        }
+        .appName {
+            font-size: 20px;
+            line-height: 40px;
+        }
+    }
+    hr {
+        margin: 15px 20px;
+        color: white;
+        height: 0.5px;
+        border: 0.5px solid white;
+    }
+    .label {
+        padding: 5px 20px;
+        color: #738296;
+        margin-bottom: 0;
+    }
+    a {
+        width: 100%;
+        height: auto;
+        padding: 10px 20px;
+        text-align: left;
+        color: white;
+        display: block;
+        clear: both;
+        height: 40px;
+        svg {
+            transition: 0.3s;
+            width: 20px;
+            height: 20px;
+            float: left;
+        }
+        p {
+            display: inline;
+            float: left;
+            line-height: 20px;
+            margin-left: 15px;
+        }
+        &.activePage, &:hover {
+            background-color: rgb(20, 29, 48)
+        }
+    }
+    p.info {
+        margin-bottom: 0;
+        padding: 5px 20px;
+        color: #738296;
+        display:block;
+        clear:both;
+        font-size: 13px;
+    }
+    div.accountInfo {
+        padding: 5px 20px;
+        img {
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+        }
+        p {
+            display: inline-block;
+            line-height: 50px;
+            margin-bottom: 0;
+            padding-left: 10px;
+        }
+    }
+    -webkit-box-shadow: 12px 0px 50px -14px rgba(0,0,0,0.79);
+    -moz-box-shadow: 12px 0px 50px -14px rgba(0,0,0,0.79);
+    box-shadow: 12px 0px 50px -14px rgba(0,0,0,0.79);
+}
+
+@media (max-width: 750px) {
+    #sidebar {
+        width: 70px;
+        .appName, .label, a p, p.info, hr, br, .accountInfo {
+            display: none;
+        }
+        #sidebarMenu {
+            margin-top: 20px;
+        }
+        #logo {
+            margin: 20px 0;
+            width: 100%;
+            height: 50px;
+            svg {
+                width: 100%;
+            }
+        }
+        a {
+            text-align: center;
+            svg {
+                margin: 0 auto;
+                float: none;
+            }
+        }
+    }
+}
