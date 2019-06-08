@@ -1,5 +1,15 @@
 @import "../../index.scss";
 
+#notification {
+    padding: 25px 30px;
+    overflow-x:hidden;
+    #contentHeader {
+        margin: -25px -30px;
+        width: calc(100% + 50px);
+        margin-bottom: 10px;
+    }
+}
+
 .nodeTitle {
     margin-bottom: 15px;
     img {
@@ -14,6 +24,7 @@
 }
 
 .nodeButtons {
+    padding: 0px 15px;
     text-align: left;
     .btn {
         height: 40px;
@@ -23,6 +34,7 @@
 }
 
 .nodeInfoList {
+    padding: 0px 30px;
     margin-top: 15px;
     list-style-type: none;
     margin-left: 0;
@@ -39,6 +51,11 @@
             width: 100%;
         }
     }
+}
+
+.nodeDescription {
+    padding: 20px;
+    background-color: #ECECEC;
 }
 
 .comments {
@@ -61,36 +78,33 @@
     }
 }
 
-@media (min-width: 1800px) {
-    .nodeTitle {
-        width: 50%;
-        max-width: 50%;
-    }
-    .nodeButtons {
-        text-align: right;
-        width: 50%;
-        max-width: 50%;
-    }
-}
                                                                                          
 body{margin-top:20px;}
 
 .card {
+    margin: 15px;
+    border: none;
     margin-top: 50px;
+
     width: 100%;
     textarea {
+        border-radius: 0;
         width: 100%
+    }
+    .card-header {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0;
     }
 }
 
 .panel-body {
-    padding: 10px;
+    padding: 10px 0;
     ul {
         padding-left: 0;
     }
     img {
         border-radius: 50%;
-        padding-right: 10px;
+        margin-right: 20px;
     }
     .media {
         margin-bottom: 20px;
@@ -104,5 +118,25 @@ body{margin-top:20px;}
     }
     p {
         clear: both;
+    }
+    a {
+        text-decoration: none;
+        color: #28a745;
+        transition: 0.3s;
+        &:hover {
+            color: $secondary;
+        }
+    }
+    .pagination {
+        .page-item.active {
+            .page-link {
+                background-color: $secondary;
+                color: white;
+            }
+        }
+        .page-link {
+            border-radius: 0;
+            color: black;
+        }
     }
 }

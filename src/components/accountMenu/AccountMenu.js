@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faUser, faUsers, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
-import "./headerMenu.scss";
+import "./accountMenu.scss";
 import LoginForm from "../forms/loginForm/LoginForm";
 import RegisterForm from "../forms/registerForm/RegisterForm";
 import Modal from "../modal/Modal";
@@ -12,7 +13,7 @@ import Alert from "react-s-alert";
 
 library.add(faUser, faUsers, faSignOutAlt);
 
-class HeaderMenu extends Component {
+class AccountMenu extends Component {
   state = {
     isLoginOpen: false,
     isRegisterOpen: false,
@@ -52,6 +53,15 @@ class HeaderMenu extends Component {
     window.location.reload();
   };
 
+  toggleView(e) {
+    var x = document.getElementById("pageContent");
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+  }
+
   render() {
     const { isLoginOpen, isRegisterOpen } = this.state;
     return (
@@ -76,26 +86,34 @@ class HeaderMenu extends Component {
           
           />
         </Modal>
-
+        <p className='label'>Konto</p>
         <Nav className="ml-auto" id="headerMenu">
 
           {localStorage.getItem("token") ? (
             <>
+              <div className='accountInfo'>
+                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle" />
+                <p>Tomek Pazera</p>
+              </div>
+              
+              <Link onClick={this.toggleView} to={"/user/" + localStorage.getItem("id")}>
+                <FontAwesomeIcon icon="user" />
+                <p>Moje konto</p>
+              </Link>
               <Nav.Link onClick={() => this.logout()}>
-                Logout
                 <FontAwesomeIcon icon="sign-out-alt" />
+                <p>Wyloguj</p>
               </Nav.Link>
             </>
           ) : (
             <>
               <Nav.Link onClick={() => this.toggleModal("isRegisterOpen")}>
-                Rejestracja
                 <FontAwesomeIcon icon="users" />
+                <p>Rejestracja</p>
               </Nav.Link>
               <Nav.Link onClick={() => this.toggleModal("isLoginOpen")}>
-                Logowanie
                 <FontAwesomeIcon icon="user" />
-                {/* pojecia nie mam czemu sa inne wielkosci ikonek */}
+                <p>Logowanie</p>
               </Nav.Link>
             </>
           )}
@@ -105,4 +123,4 @@ class HeaderMenu extends Component {
   }
 }
 
-export default HeaderMenu;
+export default AccountMenu;

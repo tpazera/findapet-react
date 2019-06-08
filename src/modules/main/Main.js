@@ -30,9 +30,8 @@ class Main extends React.Component {
     return (
       <Wrapper>
         <AppRouter>
-          <Header />
           <LeafletMap list={this.state.list} />
-          <MapSwitch />
+          {/* <MapSwitch /> */}
         </AppRouter>
       </Wrapper>
     );

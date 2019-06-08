@@ -3,3 +3,8 @@ export const addCoordinates = (northEast, southWest) => ({
   northEast,
   southWest
 });
+export const chooseCoordinates = (lat, lng) => ({
+  type: "CHOOSE_COORDINATES",
+  lat,
+  lng
+});

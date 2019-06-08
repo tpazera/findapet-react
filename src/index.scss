@@ -4,7 +4,7 @@
 // $black: #484848;
 // $white: #fff;
 $primary: #8CCEC5;
-$secondary: rgb(245, 245, 245);
+$secondary: #21304F;
 $black: #484848;
 $white: #fff;
 
@@ -15,7 +15,8 @@ body {
   background-color: $white;
   color: $black;
   font-family: "Lato";
-  overflow: overlay;
+  overflow: hidden;
+  margin-top: 0;
 }
 
 $theme-colors: (

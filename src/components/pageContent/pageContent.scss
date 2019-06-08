@@ -1,16 +1,61 @@
 @import "../../index.scss";
 
 #pageContent {
-    padding: 30px;
+    position: relative;
+    transition: 0.3s;
     display: inline-block;
-    width: calc(100% - 120px);
+    width: 40vw;
     min-height: 340px;
-    height: calc(100vh - 129px);
+    height: 100vh;
+    background-color: white;
     overflow: overlay;
+    #closeContent {
+        position: absolute;
+        z-index: 1000;
+        right: 10px;
+        top: 10px;
+        svg {
+            margin-bottom: 0;
+            color: $secondary;
+            height: 30px;
+            width: 30px;
+            transition: 0.3s;
+            cursor: pointer;
+            &:hover {
+                color: #F30B3F;
+            }
+        }
+    }
+    &::-webkit-scrollbar {
+        width: 7px;
+        height: 3px;
+    }
+    
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: rgb(225, 238, 255); 
+    }
+    
+    
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: #245DA8; 
+    }
+    
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: rgb(17, 77, 155); 
+    }
 }
 
 @media (max-width: $mapBreakpoint) {
     #pageContent {
-        width: calc(100% - 120px);
+        width: calc(90vw - 220px);
+    }
+}
+
+@media (max-width: 750px) {
+    #pageContent {
+        width: calc(100vw - 80px);
     }
 }

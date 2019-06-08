@@ -6,7 +6,7 @@ import MarkerClusterGroup from "../markerClusterGroup/MarkerClusterGroup";
 import "./leafletMap.scss";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { addCoordinates } from "../../modules/store/actions/coordinate";
+import { addCoordinates, chooseCoordinates } from "../../modules/store/actions/coordinate";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -79,6 +79,18 @@ class LeafletMap extends Component {
     this.props.addCoordinates(_northEast, _southWest);
   };
 
+  handleMapClick = ev => {
+    var location = ev.latlng;
+    this.props.chooseCoordinates(location.lat, location.lng);
+  };
+
+  refreshNotification(e) {
+    var doubleClickEvent = document.createEvent('MouseEvents');
+    doubleClickEvent.initEvent('dblclick', true, true);
+    e.currentTarget.dispatchEvent(doubleClickEvent); // inside method
+    // this.props.refreshNotification('refresh');
+  }
+
   render() {
     const { list } = this.props;
 
@@ -115,8 +127,10 @@ class LeafletMap extends Component {
       <>
         <Map
           onMoveend={this.handleMoveend}
+          onClick={this.handleMapClick}
           center={position}
           zoom={this.state.zoom}
+          doubleClickZoom = {false}
           id="map"
           maxZoom={25}
         >
@@ -155,7 +169,7 @@ class LeafletMap extends Component {
                 >
                   <Popup>
                     <p>{node.title}</p>
-                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+                    <Link onClick={this.refreshNotification} to={"/n/" + node.id}>KLIKNIJ</Link>
                   </Popup>
                 </Marker>
               ))}
@@ -205,7 +219,7 @@ class LeafletMap extends Component {
                   position={[node.latitude, node.longitude]}
                   icon={parrotMarker}
                 >
-                  <Popup>
+                  <Popup className='popup-map'>
                     <p>{node.title}</p>
                     <Link to={"/n/" + node.id}>KLIKNIJ</Link>
                   </Popup>
@@ -220,10 +234,13 @@ class LeafletMap extends Component {
 
 const mapDispatchToProps = dispatch => ({
   addCoordinates: (latitude, longitude) =>
-    dispatch(addCoordinates(latitude, longitude))
+    dispatch(addCoordinates(latitude, longitude)),
+  chooseCoordinates: (latitude, longitude) =>
+    dispatch(chooseCoordinates(latitude, longitude)),
+
 });
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(LeafletMap);

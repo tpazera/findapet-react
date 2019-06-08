@@ -1,0 +1,14 @@
+.formErrors {
+    background-color: rgb(185, 9, 47);
+    color: white;
+    border-radius: 5px;
+    p {
+        margin: 5px 10px;
+        &:first-child {
+            padding-top: 10px;
+        }
+        &:last-child {
+            padding-bottom: 10px;
+        }
+    }
+}

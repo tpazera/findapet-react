@@ -1,0 +1,17 @@
+@import "../../index.scss";
+
+#contentHeader {
+    background-color: #06ACF8;
+    padding: 30px 30px;
+    color: white;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 40px;
+    width: 100%;
+    img {
+        height: 40px;
+        width: 40px;
+        float: left;
+        margin-right: 10px;
+    }
+}

@@ -5,6 +5,11 @@ export default (state = {}, action) => {
         northEast: action.northEast,
         southWest: action.southWest
       };
+    case "CHOOSE_COORDINATES":
+      return {
+        lat: action.lat,
+        lng: action.lng
+      };
     default:
       return state;
   }

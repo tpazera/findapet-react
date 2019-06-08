@@ -1,21 +1,65 @@
-.nodeCard {
+@import "../../index.scss";
+
+.nodeListElement {
+    flex-grow: 1;
     width: 50%;
-    display: inline-block;
-    float: left;
-    text-align: left;
-    padding: 15px;
-    .nodeImageContainer {
-        width: 100%;
-        height: 250px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
+    &:nth-child(even) {
+        .nodeCard { margin-left: 20px; }
     }
+    .nodeCard {
+        width: calc(100% - 20px);
+        display: inline-block;
+        float: left;
+        text-align: left;
+        background-color: white;
+        margin: 10px 0;
+        height: auto;
+        
+        .nodeImageContainer {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        .nodeContent {
+            margin: 20px;
+            max-height: 120px;
+            p {
+                margin: 0;
+                color: black;
+                line-height: 1.1;
+            }
+            .titleNode {
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+        transition: 0.5s;
+        &:hover {
+            background-color: $secondary;
+           .nodeContent {
+               p {
+                   color: white;
+               }
+               
+           }
+        }
+    }
+
 }
 
-@media (min-width: 1000px) and (max-width: 1150px) {
+@media (min-width: 000px) and (max-width: 1250px) {
+
+.nodeListElement {
+    flex-grow: 1;
+    width: 100%;
+    &:nth-child(even) {
+        .nodeCard { margin-left: 0; }
+    }   
     .nodeCard {
         width: 100%;
+        height: auto;
         .nodeImageContainer {
             width: 100%;
         }
@@ -27,28 +71,40 @@
         }
     }
 }
+}
 
-@media (min-width: 1150px) and (max-width: 1500px) {
-    .nodeCard {
-        width: 100%;
-        .nodeImageContainer {
-            width: 50%;
-            display: inline-block;
+@media (min-width: 1250px) and (max-width: 1700px) {
+    .nodeListElement {
+        flex-grow: 1;
+        width: 100%; 
+        &:nth-child(even) {
+            .nodeCard { margin-left: 0; }
+        }   
+        .nodeCard {
+            width: 100%;
             height: 200px;
-        }
-        .nodeContent {
-            float: right;
-            width: 50%;
-            display: inline-block;
-            height: 200px;
-            line-height: 200px;
-            padding-left: 15px;
-            span {
+            .nodeImageContainer {
+                width: 50%;
                 display: inline-block;
-                vertical-align: middle;
-                line-height: normal;
+                height: 100%;
+            }
+            .nodeContent {
+                margin: 0;
+                float: right;
+                width: 50%;
+                display: inline-block;
+                height: 200px;
+                max-height: 200px;
+                line-height: 200px;
+                padding-left: 15px;
+                div {
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: normal;
+                }
             }
         }
     }
+
 }
 
