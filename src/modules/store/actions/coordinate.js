@@ -8,3 +8,8 @@ export const chooseCoordinates = (lat, lng) => ({
   lat,
   lng
 });
+export const goToCoords = (lat2, lng2) => ({
+  type: "GO_TO_COORDINATES",
+  lat2,
+  lng2
+});

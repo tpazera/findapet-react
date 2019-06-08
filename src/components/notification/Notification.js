@@ -13,6 +13,8 @@ import {
 import Axios from "axios";
 import { Link } from "react-router-dom";
 import Alert from "react-s-alert";
+import { connect } from "react-redux";
+import { goToCoords } from "../../modules/store/actions/coordinate";
 
 class Notification extends Component {
 
@@ -25,6 +27,7 @@ class Notification extends Component {
                 node: response.data,
                 photos: response.data.photoURL
             });
+            
         })
     }
     
@@ -50,6 +53,7 @@ class Notification extends Component {
     componentDidMount() {
         Axios.get('https://find-pet-app.herokuapp.com/rest/announcement/' + this.props.id)
         .then((response) => {
+            this.props.goToCoords(response.data.latitude, response.data.longitude);
             this.setState({
                 node: response.data,
                 photos: response.data.photoURL,
@@ -66,7 +70,6 @@ class Notification extends Component {
                 comments: response.data,
                 activeCommentPage: page
             })
-            console.log(response.data)
         })
         .catch(function(error) {
           console.log(error);
@@ -76,7 +79,6 @@ class Notification extends Component {
             this.setState({
                 commentsLength: response.data
             })
-            console.log(response.data)
         })
         .catch(function(error) {
           console.log(error);
@@ -253,8 +255,8 @@ class Notification extends Component {
                                 </>
                             ) : ( <></> )}
                             <ul className="media-list">
-                                {this.state.comments.map((comment) => (
-                                    <li className="media">
+                                {this.state.comments.map((comment, i) => (
+                                    <li className="media" key={i}>
                                         <a href="#" className="pull-left">
                                             <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle" />
                                         </a>
@@ -281,4 +283,12 @@ class Notification extends Component {
     }
 }
 
-export default Notification;
+const mapDispatchToProps = dispatch => ({
+    goToCoords: (latitude, longitude) =>
+        dispatch(goToCoords(latitude, longitude))
+});
+
+export default connect(
+null,
+mapDispatchToProps,
+)(Notification);

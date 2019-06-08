@@ -60,6 +60,27 @@ class LeafletMap extends Component {
       lng: -0.09,
       zoom: 13
     };
+    
+  }
+
+  componentWillMount() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        this.saveLocationInfo.bind(this)
+      );
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    
+    if (newProps.newcoords.lat2 && newProps.newcoords.lng2) {
+      console.log("new position: " + newProps.newcoords.lat2 + " " + newProps.newcoords.lng2);
+      this.setState = {
+        lat: newProps.newcoords.lat2,
+        lng: newProps.newcoords.lng2,
+        zoom: 13
+      }
+    }
   }
 
   saveLocationInfo(position) {
@@ -113,22 +134,17 @@ class LeafletMap extends Component {
         item.animalType !== "papuga"
     );
 
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        this.saveLocationInfo.bind(this)
-      );
-    }
-
     const isListNotEmpty = list && list.length > 0;
 
     let position = [this.state.lat, this.state.lng];
+    console.log(position);
 
     return (
       <>
         <Map
           onMoveend={this.handleMoveend}
           onClick={this.handleMapClick}
-          center={position}
+          center={[this.state.lat, this.state.lng]}
           zoom={this.state.zoom}
           doubleClickZoom = {false}
           id="map"
@@ -240,7 +256,11 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
+const mapStateToProps = store => ({
+  newcoords: store.coordinates
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(LeafletMap);
