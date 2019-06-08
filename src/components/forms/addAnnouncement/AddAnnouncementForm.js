@@ -70,12 +70,12 @@ class AddAnnouncementForm extends Component {
         "title": this.state.title,
         "userId": localStorage.getItem('id')
       };
-      console.log(JSON.stringify(dto));
+      console.log(JSON.parse(dto));
       axios.post('https://find-pet-app.herokuapp.com/rest/announcement', {
-        announcement: JSON.stringify(dto)
+        announcement: JSON.parse(dto)
       }, {
         headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
+            'Content-Type': 'application/json',
             "Access-Control-Allow-Origin": "*",
             "Authorization":localStorage.getItem('token')
         }

@@ -28,16 +28,19 @@ class RegisterForm extends Component {
 
     if (this.state.formValid) {
       let dto = {
-        "email": this.state.email,
-        "id": 0,
-        "nick": this.state.username,
-        "number": this.state.phone,
-        "other": this.state.desc.replace(/<[^>]*>?/gm, ''),
-        "password": this.state.password
+        "email": this.state.email.toString(),
+        "nick": this.state.username.toString(),
+        "number": this.state.phone.toString(),
+        "other": this.state.desc.replace(/<[^>]*>?/gm, '').toString(),
+        "password": this.state.password.toString()
       };
-      console.log(JSON.stringify(dto));
-      axios.post('https://find-pet-app.herokuapp.com/rest/user', {
-        userDTO: JSON.stringify(dto)
+      axios.post('find-pet-app.herokuapp.com/rest/user', {
+        userDTO: JSON.parse(dto)
+      }, {
+          headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*"
+          }
       })
       .then((response) => {
         Alert.success("Zarejestrowano", {
