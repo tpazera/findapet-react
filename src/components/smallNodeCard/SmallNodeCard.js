@@ -3,13 +3,13 @@ import './smallNodeCard.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEye, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faTrash, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import {
     Button,
   } from "react-bootstrap";
 import Axios from 'axios';
 
-library.add(faEye, faTrash);
+library.add(faEye, faTrash, faUnlock);
 
 const SmallNodeCard = ({
     id,
@@ -32,9 +32,27 @@ const SmallNodeCard = ({
           }
           
           Axios.delete('https://find-pet-app.herokuapp.com/rest/announcement/' + id, {headers, data})
-          
-          resetFunction();
+            .then(response => {
+                resetFunction();
+            })
+            .catch(function(error) {
+            });
     };
+
+    const unlockNode = () => { 
+        Axios.post('https://find-pet-app.herokuapp.com/rest/announcement/' + id + '/activate', {
+        }, {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+                "Authorization":localStorage.getItem('token')
+            }
+        })
+        .then((response) => {
+            resetFunction();
+        })
+    };
+
 
     let type = animalType;
     let src;
@@ -49,9 +67,11 @@ const SmallNodeCard = ({
         backgroundImage: 'url(' + src + ')'
     }
 
-    let ifowner = false;
-    if (userId === localStorage.getItem('id')) ifowner = true;
-
+    let ifowneroradmin = false;
+    if (userId === localStorage.getItem('id')) ifowneroradmin = true;
+    if (localStorage.getItem('admin')) ifowneroradmin = true;
+    let ifadmin = false;
+    if (localStorage.getItem('admin')) ifadmin = true;
     return (
         <div className={className}>
             
@@ -67,9 +87,14 @@ const SmallNodeCard = ({
                                 <FontAwesomeIcon icon="eye" />
                             </Button>
                         </Link>
-                        {ifowner ? (
+                        {ifowneroradmin ? (
                             <Button variant="danger" onClick={deleteNode} >
                                 <FontAwesomeIcon icon="trash"/>
+                            </Button>
+                        ) : (<></>)}
+                        {ifadmin ? (
+                            <Button variant="info" onClick={unlockNode} >
+                                <FontAwesomeIcon icon="unlock"/>
                             </Button>
                         ) : (<></>)}
                         

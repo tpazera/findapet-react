@@ -6,7 +6,7 @@ import SmallNodeList from "../../components/smallNodeList/SmallNodeList";
 import ContentHeader from "../../components/contentHeader/ContentHeader";
 import Axios from "axios";
 
-class UserNodesPage extends Component {
+class ReportedPage extends Component {
 
     constructor(props) {
         super(props);
@@ -18,12 +18,9 @@ class UserNodesPage extends Component {
     }
 
     handler() {
-        Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
+        Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all?active=false")
             .then(response => {
-                const newlist = response.data.filter(
-                    // item => item.userId === 1
-                    item => item.userId === localStorage.getItem('id')
-                )
+                const newlist = response.data;
                 this.setState(prevState => (
                     {
                         list: newlist,
@@ -36,12 +33,9 @@ class UserNodesPage extends Component {
     }
     
     componentDidMount() {
-        Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
+        Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all?active=false")
             .then(response => {
-                const newlist = response.data.filter(
-                    // item => item.userId === 1
-                    item => item.userId === localStorage.getItem('id')
-                )
+                const newlist = response.data;
                 this.setState({ list : newlist });
             })
             .catch(function(error) {
@@ -55,12 +49,12 @@ class UserNodesPage extends Component {
             <PageWrapper>
                 <Sidebar />
                 <PageContent>
-                    <ContentHeader>Twoje ogłoszenia</ContentHeader>
-                    <SmallNodeList list={this.state.list} />
+                    <ContentHeader>Zgłoszone ogłoszenia</ContentHeader>
+                    <SmallNodeList handler={this.handler} list={this.state.list} />
                 </PageContent>
             </PageWrapper>
         );
     }
 }
 
-export default UserNodesPage;
+export default ReportedPage;

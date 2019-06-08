@@ -22,6 +22,7 @@ class AccountMenu extends Component {
 
   toggleModal = type =>
     this.setState(prevState => ({ [type]: !prevState[type] }));
+
     
   componentDidUpdate() {
     console.log(this.state.closeModal)
@@ -40,16 +41,14 @@ class AccountMenu extends Component {
       closeModal: true
     })
     console.log('test');
-    // Alert.success('Zalogowano', {
-    //   position: "bottom-left",
-    //   effect: "slide",
-    //   timeout: 5000
-    // });
+
   }
 
 
   logout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("admin");
     window.location.reload();
   };
 
@@ -93,7 +92,7 @@ class AccountMenu extends Component {
             <>
               <div className='accountInfo'>
                 <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle" />
-                <p>Tomek Pazera</p>
+                <p>{localStorage.getItem('nick')}</p>
               </div>
               
               <Link onClick={this.toggleView} to={"/user/" + localStorage.getItem("id")}>

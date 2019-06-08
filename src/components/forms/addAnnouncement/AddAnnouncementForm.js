@@ -50,29 +50,25 @@ class AddAnnouncementForm extends Component {
   onFormSubmit = () => {
 
     if (this.state.formValid) {
-      let dto = {
-        "active": true,
-        "animalType": this.state.type,
-        "category": "string",
-        "comments": [],
-        "description": this.state.desc,
-        "id": 0,
-        "latitude": this.state.latitude,
-        "localDateTime": "2019-06-07T15:23:56.552Z",
-        "longitude": this.state.longtitude,
-        "petColors": [
+      axios.post('https://find-pet-app.herokuapp.com/rest/announcement', {
+        active: true,
+        animalType: this.state.type,
+        category: "string",
+        comments: [],
+        description: this.state.desc,
+        id: 0,
+        latitude: this.state.latitude,
+        localDateTime: "2019-06-07T15:23:56.552Z",
+        longitude: this.state.longtitude,
+        petColors: [
           this.state.color
         ],
-        "photoURL": [
+        photoURL: [
           this.state.images.replace('\n',',')
         ],
-        "status": this.state.status,
-        "title": this.state.title,
-        "userId": localStorage.getItem('id')
-      };
-      console.log(JSON.parse(dto));
-      axios.post('https://find-pet-app.herokuapp.com/rest/announcement', {
-        announcement: JSON.parse(dto)
+        status: this.state.status,
+        title: this.state.title,
+        userId: localStorage.getItem('id')
       }, {
         headers: {
             'Content-Type': 'application/json',
@@ -99,6 +95,7 @@ class AddAnnouncementForm extends Component {
   };
 
   handleUserInput (e) {
+    console.log(this.state.status);
     const name = e.target.name;
     const value = e.target.value;
     this.setState({[name]: value}, 
@@ -190,16 +187,19 @@ class AddAnnouncementForm extends Component {
         .then(res => {
             const colors = res.data;
             this.setState({ colors });
+            this.setState({ color: res.data[0]});
         })
     axios.get(`https://find-pet-app.herokuapp.com/rest/announcement/status`)
         .then(res => {
             const statuses = res.data;
             this.setState({ statuses });
+            this.setState({ status: res.data[0]});
         })
     axios.get(`https://find-pet-app.herokuapp.com/rest/announcement/types`)
         .then(res => {
             const types = res.data;
             this.setState({ types });
+            this.setState({ type: res.data[0]});
         })
   }  
 
@@ -224,7 +224,8 @@ class AddAnnouncementForm extends Component {
         </Form.Group>
         <Form.Group controlId="selectColor">
         <Form.Label>Kolor</Form.Label>
-        <Form.Control as="select" name="color" value={this.state.value}>
+        <Form.Control as="select" name="color" value={this.state.value}
+            onChange={(event) => this.handleUserInput(event)}>
             {this.state.colors.map((item,i) => (
                 <option value={item} key={item + i}>{item}</option>
             ))}
@@ -233,7 +234,8 @@ class AddAnnouncementForm extends Component {
 
         <Form.Group controlId="selectType">
         <Form.Label>Typ</Form.Label>
-        <Form.Control as="select" name="type" value={this.state.value}>
+        <Form.Control as="select" name="type" value={this.state.value}
+            onChange={(event) => this.handleUserInput(event)}>
             {this.state.types.map((item,i) => (
                 <option value={item} key={item + i}>{item}</option>
             ))}
@@ -242,7 +244,8 @@ class AddAnnouncementForm extends Component {
         
         <Form.Group controlId="selectStatus">
         <Form.Label>Status</Form.Label>
-        <Form.Control as="select" name="status" value={this.state.value}>
+        <Form.Control as="select" name="status" value={this.state.value}
+            onChange={(event) => this.handleUserInput(event)}>
             {this.state.statuses.map((item,i) => (
                 <option value={item} key={item + i}>{item}</option>
             ))}

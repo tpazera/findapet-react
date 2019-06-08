@@ -38,12 +38,16 @@
                     height: 30px;
                     width: 40px;
                     margin: 0;
-                    padding: 3px;
+                    padding: 0px;
+                    margin-left: 5px;
                     svg {
                         margin-bottom: 0 !important;
                         height: 100%;
                         width: auto;
                     }
+                }
+                button {
+                    padding: 3px;
                 }
             }
         }

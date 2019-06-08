@@ -27,16 +27,13 @@ class RegisterForm extends Component {
   onFormSubmit = () => {
 
     if (this.state.formValid) {
-      let dto = {
-        "email": this.state.email,
-        "id": 0,
-        "nick": this.state.username,
-        "number": this.state.phone,
-        "other": this.state.desc.replace(/<[^>]*>?/gm, ''),
-        "password": this.state.password
-      };
       axios.post('https://find-pet-app.herokuapp.com/rest/user', {
-        userDTO: dto
+        email: this.state.email,
+        id: 0,
+        nick: this.state.username,
+        number: this.state.phone,
+        other: this.state.desc.replace(/<[^>]*>?/gm, ''),
+        password: this.state.password
       }, {
           headers: {
               'Content-Type': 'application/json;charset=UTF-8',

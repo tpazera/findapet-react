@@ -14,7 +14,11 @@ library.add(faExclamationTriangle);
 class UserPage extends Component {
     
     state = {
-        list: ""
+        list: "",
+        nick: "Tomek Pazera",
+        phone: "810 823 823",
+        email: "tomasz.pazera96@gmail.com",
+        desc: "Curabitur ullamcorper ultricies nisi. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc."
     };
     
 
@@ -23,11 +27,20 @@ class UserPage extends Component {
         Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
             .then(response => {
                 const newlist = response.data.filter(
-                    // item => item.userId === 1
                     item => item.userId == id
                 )
-                console.log(response.data);
-                this.setState({ list : newlist });
+                Axios.get("https://find-pet-app.herokuapp.com/rest/user/" + id)
+                    .then(res => {
+                        this.setState({ 
+                            list : newlist,
+                            nick : res.data.nick,
+                            phone : res.data.phone,
+                            email : res.data.email,
+                            desc : res.data.desc,
+                        });
+                    })
+                    .catch(function(error) {
+                    });
             })
             .catch(function(error) {
             });
@@ -41,10 +54,15 @@ class UserPage extends Component {
                 <PageContent>
                     <div id="userPage">
                         <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle" />
-                        <h1>Tomek Pazera</h1>
-                        <p><strong>Telefon: </strong>812 823 123</p>
-                        <p><strong>Email: </strong>tomasz.pazera96@gmail.com</p>
-                        <p>Curabitur ullamcorper ultricies nisi. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc.</p>
+                        <h1>{this.state.nick}</h1>
+                        { this.state.phone != null ? (
+                            <p><strong>Telefon: </strong>{this.state.phone}</p>
+                        ) : (<></>)}
+                        <p><strong>Email: </strong>{this.state.email}</p>
+                        { this.state.desc != null ? (
+                            <p>{this.state.desc}</p>
+                        ) : (<></>)}
+                        
                     </div>
                         
                     <SmallNodeList list={this.state.list} />
