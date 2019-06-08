@@ -9,6 +9,7 @@ import AboutPage from "./../../pages/about/AboutPage";
 import ErrorPage from "./../../pages/error/ErrorPage";
 import UserPage from "./../../pages/user/UserPage";
 import configureStore from "../store/store";
+import ReportedPage from "../../pages/reported/ReportedPage";
 
 const store = configureStore();
 
@@ -24,6 +25,7 @@ const AppRouter = ({ children }) => (
           <Route path="/dodaj-ogloszenie" component={AddAnnounecement} />
           <Route path="/o-nas" component={AboutPage} />
           <Route path="/user/:id(\d+)" component={UserPage} />
+          <Route path="/zgloszone" component={ReportedPage} />
           <Route component={ErrorPage} />
         </Switch>
       </div>

@@ -174,6 +174,7 @@ class Notification extends Component {
         let lnk = "/user/" + node.userId;
         let ifowner = false;
         if (localStorage.getItem("id") == node.userId) ifowner = true;
+        if (localStorage.getItem("admin")) ifowner = true;
                 
         return (
             
@@ -192,9 +193,9 @@ class Notification extends Component {
                         {localStorage.getItem("token") ? (
                             <>
                                 <Button onClick={this.reportNode} variant="warning">zgłoś</Button>
-                                <Link to={lnk}><Button variant="success">kontakt</Button></Link>
                             </>
                         ) : ( <></> )}
+                        <Link to={lnk}><Button variant="success">kontakt</Button></Link>
                         {ifowner ? (
                             <>
                                 <Button onClick={this.deleteNode} text="Usuń" variant="danger">usuń</Button>

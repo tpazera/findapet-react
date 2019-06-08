@@ -39,14 +39,28 @@ class LoginForm extends Component {
         });
         localStorage.setItem("token", response.data.Authorization);
         localStorage.setItem("id", response.data.id);
-        Alert.success("Zalogowano", {
+        if(response.data.roles.includes("ADMIN")) {
+          localStorage.setItem("admin", 1);
+        } else {
+          localStorage.setItem("admin", 0);
+        }
+        Alert.success("Zalogowano. Przeładowanie strony za 3s.", {
           position: "bottom-left",
           effect: "slide",
           timeout: 5000
         });
+        axios.get("https://find-pet-app.herokuapp.com/rest/user/" + response.data.id)
+            .then(res => {
+                localStorage.setItem("nick", res.data.nick);
+                localStorage.setItem("email", res.data.email);
+                localStorage.setItem("number", res.data.number);
+                localStorage.setItem("other", res.data.other);
+            })
+            .catch(function(error) {
+            });
         setTimeout(() => {
           window.location.reload();
-        }, 2000);
+        }, 3000);
       })
       .catch(error => {
         Alert.error("Niepoprawne dane", {

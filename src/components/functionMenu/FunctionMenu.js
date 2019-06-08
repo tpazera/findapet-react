@@ -7,11 +7,12 @@ import {
   faBook,
   faInfoCircle,
   faBullhorn,
-  faPlus
+  faPlus,
+  faExclamationCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 
-library.add(faBook, faInfoCircle, faBullhorn, faPlus);
+library.add(faBook, faInfoCircle, faBullhorn, faPlus, faExclamationCircle);
 class FunctionMenu extends Component {
 
   constructor(props) {
@@ -29,6 +30,8 @@ class FunctionMenu extends Component {
   }
 
   render() {
+    const adm = localStorage.getItem("admin");
+
     return (
       <div id="sidebarMenu">
         <p className='label'>Funkcje</p>
@@ -36,6 +39,14 @@ class FunctionMenu extends Component {
           <FontAwesomeIcon icon="bullhorn" />
           <p>Ogłoszenia</p>
         </Link> 
+        {adm == 1 ? (
+          <>
+            <Link onClick={this.toggleView} to="/zgloszone">
+              <FontAwesomeIcon icon="exclamation-circle" />
+              <p>Zgłoszenia</p>
+            </Link>
+          </>
+        ) : (<></>)}
         {localStorage.getItem("token") ? (
           <>
           <Link onClick={this.toggleView} to="/twoje-ogloszenia">

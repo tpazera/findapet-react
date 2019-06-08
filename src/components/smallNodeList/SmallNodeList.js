@@ -7,15 +7,16 @@ class SmallNodeList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'test'
+      value: true
     }
     this.reset = this.reset.bind(this);
   }
 
   reset() {
-    this.setState({
-      value: 'test2'
-    })
+    // this.setState( prevState => ({
+    //   value: !prevState.value
+    // }))
+    this.props.handler();
   }
 
   render() {
