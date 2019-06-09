@@ -1,0 +1,142 @@
+@import "../../index.scss";
+
+#notification {
+    padding: 25px 30px;
+    overflow-x:hidden;
+    #contentHeader {
+        margin: -25px -15px;
+        width: calc(100% + 50px);
+        margin-bottom: 10px;
+    }
+}
+
+.nodeTitle {
+    margin-bottom: 15px;
+    img {
+        height: 60px;
+        float: left;
+        margin-right: 10px;
+    }
+    h1 {
+        display: inline;
+        line-height: 60px;
+    }
+}
+
+.nodeButtons {
+    padding: 0px 15px;
+    text-align: left;
+    .btn {
+        height: 40px;
+        margin: 10px 0;
+        margin-right: 15px;
+    }
+}
+
+.nodeInfoList {
+    padding: 0px 30px;
+    margin-top: 15px;
+    list-style-type: none;
+    margin-left: 0;
+    text-indent: 0;
+    padding-left: 0;
+}
+
+.gallery {
+    img {
+        width: 50%;
+        height: auto;
+        display: inline;
+        &:first-child {
+            width: 100%;
+        }
+    }
+}
+
+.nodeDescription {
+    padding: 20px;
+    background-color: #ECECEC;
+}
+
+.comments {
+    margin-top: 30px;
+    .pagination {
+        margin: 0 auto;
+        margin-top: 5px;
+    }
+    textarea {
+        margin-top: 15px;
+    }    
+}
+
+
+@media (max-width: 576px) {
+    .gallery {
+        img {
+            width: 100%;
+        }
+    }
+}
+
+                                                                                         
+body{margin-top:20px;}
+
+.card {
+    margin: 15px;
+    border: none;
+    margin-top: 50px;
+
+    width: 100%;
+    textarea {
+        border-radius: 0;
+        width: 100%
+    }
+    .card-header {
+        border: 1px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0;
+    }
+}
+
+.panel-body {
+    padding: 10px 0;
+    ul {
+        padding-left: 0;
+    }
+    img {
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+    .media {
+        margin-bottom: 20px;
+    }
+    .pagination {
+        margin: 10px auto;
+    }
+    span {
+        display: block;
+        float: right;
+    }
+    p {
+        clear: both;
+    }
+    a {
+        text-decoration: none;
+        color: #28a745;
+        transition: 0.3s;
+        &:hover {
+            color: $secondary;
+        }
+    }
+    .pagination {
+        .page-item.active {
+            .page-link {
+                background-color: $secondary;
+                color: white;
+            }
+        }
+        .page-link {
+            border-radius: 0;
+            color: black;
+        }
+    }
+}
