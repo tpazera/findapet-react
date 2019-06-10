@@ -5,10 +5,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import PageContent from "../../components/pageContent/PageContent";
 import NodeList from "../../components/nodeList/NodeList";
 import SortBar from "../../components/sortBar/SortBar";
-import nodes from "../../resources/data.json";
 import axios from "axios";
-import { Alert } from "react-bootstrap";
-import { StringDecoder } from "string_decoder";
 
 class NodeListPage extends Component {
   state = {
