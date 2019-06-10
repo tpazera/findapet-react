@@ -121,8 +121,9 @@ body{margin-top:20px;}
             display: inline;
             margin-left: 3px;
             color: #dc3545;
-            font-size: 17px;
+            font-size: 15px;
             font-weight: bold;
+            cursor: pointer;
             &:hover {
                 color: #c82333;
             }
