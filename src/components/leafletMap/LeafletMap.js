@@ -57,8 +57,8 @@ class LeafletMap extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lat: 51.505,
-            lng: -0.09,
+            lat: 50.026,
+            lng: 19.950,
             zoom: 13
         }
     }
