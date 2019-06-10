@@ -20,6 +20,30 @@ class UserPage extends Component {
         email: "tomasz.pazera96@gmail.com",
         desc: "Curabitur ullamcorper ultricies nisi. Aenean tellus metus, bibendum sed, posuere ac, mattis non, nunc."
     };
+
+    handler() {
+        let id = this.props.match.params.id
+        Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
+            .then(response => {
+                const newlist = response.data.filter(
+                    item => item.userId == id
+                )
+                Axios.get("https://find-pet-app.herokuapp.com/rest/user/" + id)
+                    .then(res => {
+                        this.setState({ 
+                            list : newlist,
+                            nick : res.data.nick,
+                            phone : res.data.phone,
+                            email : res.data.email,
+                            desc : res.data.desc,
+                        });
+                    })
+                    .catch(function(error) {
+                    });
+            })
+            .catch(function(error) {
+            });
+    }
     
 
     componentDidMount() {
@@ -65,7 +89,7 @@ class UserPage extends Component {
                         
                     </div>
                         
-                    <SmallNodeList list={this.state.list} />
+                    <SmallNodeList handler={this.handler}  list={this.state.list} />
                 </PageContent>
             </PageWrapper>
         );

@@ -175,7 +175,7 @@ class LeafletMap extends Component {
                         </Marker>
                     ))} */}
 
-              others.map(node => this.renderMarker(defaultMarker, node))}
+            {others.map(node => this.renderMarker(defaultMarker, node))}
             {isListNotEmpty &&
               dogs.map(node => this.renderMarker(dogMarker, node))}
             {isListNotEmpty &&

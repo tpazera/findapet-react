@@ -80,27 +80,28 @@ class Notification extends Component {
         (page - 1) * this.state.commentOnPage
     )
       .then(response => {
-        this.setState({
-          comments: response.data,
-          activeCommentPage: page
-        });
+        let comments = response.data;
+        let activeCommentPage = page;
+        Axios.get(
+            "https://find-pet-app.herokuapp.com/rest/comment/" +
+              this.props.id +
+              "/amount"
+          )
+            .then(response => {
+              this.setState({
+                comments: comments,
+                activeCommentPage: activeCommentPage,
+                commentsLength: response.data
+              });
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
       })
       .catch(function(error) {
         console.log(error);
       });
-    Axios.get(
-      "https://find-pet-app.herokuapp.com/rest/comment/" +
-        this.props.id +
-        "/amount"
-    )
-      .then(response => {
-        this.setState({
-          commentsLength: response.data
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+
   }
 
   changeCommentPage(e) {
@@ -113,6 +114,8 @@ class Notification extends Component {
   }
 
   handleSubmit(event) {
+    document.getElementById("addcommentbutton").disabled = true;
+    setTimeout(function(){document.getElementById("addcommentbutton").disabled = false;}, 5000);
     Axios.post(
       "https://find-pet-app.herokuapp.com/rest/comment/",
       {
@@ -127,15 +130,43 @@ class Notification extends Component {
           Authorization: localStorage.getItem("token")
         }
       }
-    ).then(response => {
-      Alert.success("Dodano komentarz", {
-        position: "bottom-left",
-        effect: "slide",
-        timeout: 3000
-      });
-    });
-    this.getComments(this.state.activeCommentPage);
+    )
+        .then(response => {
+            Alert.success("Dodano komentarz", {
+                position: "bottom-left",
+                effect: "slide",
+                timeout: 3000
+            });
+          this.getComments(this.state.activeCommentPage);
+        })
+        .catch(error => {
+            Alert.error("Błąd. Nie można dodawać pustych komentarzy", {
+                position: "bottom-left",
+                effect: "slide",
+                timeout: 1000
+            });
+        });
     event.preventDefault();
+  }
+
+  deleteComment(id, e) {
+    Axios.delete('https://find-pet-app.herokuapp.com/rest/comment/' + id, {
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            "Authorization":localStorage.getItem('token')
+        }
+    })
+    .then(response => {
+        this.getComments(this.state.activeCommentPage);
+        Alert.error("Usunięto komentarz", {
+            position: "bottom-left",
+            effect: "slide",
+            timeout: 3000
+          });
+    })
+    .catch(function(error) {
+    });
   }
 
   reportNode(e) {
@@ -288,6 +319,7 @@ class Notification extends Component {
                     variant="primary"
                     type="submit"
                     onClick={this.handleSubmit}
+                    id="addcommentbutton"
                   >
                     Dodaj komentarz
                   </Button>
@@ -300,13 +332,13 @@ class Notification extends Component {
               <ul className="media-list">
                 {this.state.comments.map((comment, i) => (
                   <li className="media" key={i}>
-                    <a href="#" className="pull-left">
-                      <img
-                        src="https://bootdey.com/img/Content/user_1.jpg"
-                        alt=""
-                        className="img-circle"
-                      />
-                    </a>
+                    <Link to={"/user/" + comment.userId} className="pull-left">
+                        <img
+                            src="https://bootdey.com/img/Content/user_1.jpg"
+                            alt=""
+                            className="img-circle"
+                        />
+                    </Link>
                     <div className="media-body">
                       <Link to={"/user/" + comment.userId}>
                         <strong>@{comment.userName}</strong>
@@ -316,6 +348,9 @@ class Notification extends Component {
                           {comment.date
                             .replace("T", " ")
                             .substring(0, comment.date.lastIndexOf(":"))}
+                            { comment.userId == parseInt(localStorage.getItem('id')) ? (
+                                <div className="deleteComment" onClick={(e) => this.deleteComment(comment.id, e)}>x</div>
+                            ) : <></>}
                         </small>
                       </span>
                       <p>{comment.description}</p>

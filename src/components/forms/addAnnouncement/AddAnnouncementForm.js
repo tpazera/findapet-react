@@ -78,11 +78,11 @@ class AddAnnouncementForm extends Component {
         Alert.success("Dodano ogłoszenie", {
           position: "bottom-left",
           effect: "slide",
-          timeout: 3000
+          timeout: 1500
         });
         setTimeout(function() {
           window.location.reload();
-        }, 3000)
+        }, 1500)
       })
       .catch(function (error) {
         console.log(error);

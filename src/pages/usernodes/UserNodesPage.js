@@ -18,11 +18,13 @@ class UserNodesPage extends Component {
     }
 
     handler() {
+        let id;
         Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
             .then(response => {
+
+                id = parseInt(localStorage.getItem('id'));
                 const newlist = response.data.filter(
-                    // item => item.userId === 1
-                    item => item.userId === localStorage.getItem('id')
+                    item => item.userId === id
                 )
                 this.setState(prevState => (
                     {
@@ -35,28 +37,34 @@ class UserNodesPage extends Component {
             });
     }
     
+    
     componentDidMount() {
+        let id;
         Axios.get("https://find-pet-app.herokuapp.com/rest/announcement/all")
             .then(response => {
+                id = parseInt(localStorage.getItem('id'));
                 const newlist = response.data.filter(
-                    // item => item.userId === 1
-                    item => item.userId === localStorage.getItem('id')
+                    item => item.userId === id
                 )
-                this.setState({ list : newlist });
+                console.log(newlist);
+                this.setState(prevState => (
+                    {
+                        list: newlist,
+                        value: !prevState.value
+                    }
+                ))  
             })
             .catch(function(error) {
             });
     }
 
     render() {
- 
-
         return (
             <PageWrapper>
                 <Sidebar />
                 <PageContent>
                     <ContentHeader>Twoje ogłoszenia</ContentHeader>
-                    <SmallNodeList list={this.state.list} />
+                    <SmallNodeList handler={this.handler} list={this.state.list} />
                 </PageContent>
             </PageWrapper>
         );
