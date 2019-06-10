@@ -30,7 +30,7 @@ class OtherMenu extends Component {
         <p className='label'>Pomoc</p>
         <Nav className="ml-auto" id="headerMenu">
             <>
-              <Link onClick={this.toggleView} to="#">
+              <Link onClick={this.toggleView} to="/faq">
                 <FontAwesomeIcon icon="question-circle" />
                 <p>FAQ</p>
               </Link>

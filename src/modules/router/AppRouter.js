@@ -8,6 +8,7 @@ import AddAnnounecement from "../../pages/announecements/AddAnnounecement";
 import AboutPage from "./../../pages/about/AboutPage";
 import ErrorPage from "./../../pages/error/ErrorPage";
 import UserPage from "./../../pages/user/UserPage";
+import FaqPage from "./../../pages/faq/FaqPage";
 import configureStore from "../store/store";
 import ReportedPage from "../../pages/reported/ReportedPage";
 
@@ -23,6 +24,7 @@ const AppRouter = ({ children }) => (
           <Route path="/n/:id(\d+)" component={NodePage} />
           <Route path="/twoje-ogloszenia" component={UserNodesPage} />
           <Route path="/dodaj-ogloszenie" component={AddAnnounecement} />
+          <Route path="/faq" component={FaqPage} />
           <Route path="/o-nas" component={AboutPage} />
           <Route path="/user/:id(\d+)" component={UserPage} />
           <Route path="/zgloszone" component={ReportedPage} />
