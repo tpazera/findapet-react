@@ -1,3 +1,5 @@
+@import '../../index.scss';
+
 #aboutContent {
   padding: 30px;
 }
@@ -110,4 +112,28 @@ body {
   .card-body {
       border-bottom: 1px solid rgba(0,0,0,.125);
   }
+}
+
+#faqList {
+    padding: 30px;
+    .card {
+        margin: 0;
+        margin-top: 0;
+        p, ul {
+            margin-bottom: 0;
+        }
+        .card-header {
+            background-color: $secondary;
+            border-radius: 0;
+            border: none;
+            color: white;
+            border-bottom: 2px solid white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            &:hover {
+                background-color: #06ACF8
+            }
+        }
+    }
 }

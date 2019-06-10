@@ -8,6 +8,21 @@
         width: calc(100% + 50px);
         margin-bottom: 10px;
     }
+    .card {
+        margin: 15px;
+        border: none;
+        margin-top: 50px;
+    
+        width: 100%;
+        textarea {
+            border-radius: 0;
+            width: 100%
+        }
+        .card-header {
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            border-radius: 0;
+        }
+    }
 }
 
 .nodeTitle {
@@ -81,26 +96,13 @@
                                                                                          
 body{margin-top:20px;}
 
-.card {
-    margin: 15px;
-    border: none;
-    margin-top: 50px;
 
-    width: 100%;
-    textarea {
-        border-radius: 0;
-        width: 100%
-    }
-    .card-header {
-        border: 1px solid rgba(0, 0, 0, 0.125);
-        border-radius: 0;
-    }
-}
 
 .panel-body {
     padding: 10px 0;
     ul {
         padding-left: 0;
+        margin-bottom: 0;
     }
     img {
         border-radius: 50%;
@@ -128,6 +130,7 @@ body{margin-top:20px;}
         }
     }
     .pagination {
+        margin-top: 0;
         .page-item.active {
             .page-link {
                 background-color: $secondary;
@@ -140,3 +143,4 @@ body{margin-top:20px;}
         }
     }
 }
+

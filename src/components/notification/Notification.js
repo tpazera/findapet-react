@@ -80,27 +80,28 @@ class Notification extends Component {
         (page - 1) * this.state.commentOnPage
     )
       .then(response => {
-        this.setState({
-          comments: response.data,
-          activeCommentPage: page
-        });
+        let comments = response.data;
+        let activeCommentPage = page;
+        Axios.get(
+            "https://find-pet-app.herokuapp.com/rest/comment/" +
+              this.props.id +
+              "/amount"
+          )
+            .then(response => {
+              this.setState({
+                comments: comments,
+                activeCommentPage: activeCommentPage,
+                commentsLength: response.data
+              });
+            })
+            .catch(function(error) {
+              console.log(error);
+            });
       })
       .catch(function(error) {
         console.log(error);
       });
-    Axios.get(
-      "https://find-pet-app.herokuapp.com/rest/comment/" +
-        this.props.id +
-        "/amount"
-    )
-      .then(response => {
-        this.setState({
-          commentsLength: response.data
-        });
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
+
   }
 
   changeCommentPage(e) {
@@ -133,8 +134,8 @@ class Notification extends Component {
         effect: "slide",
         timeout: 3000
       });
+        this.getComments(this.state.activeCommentPage);
     });
-    this.getComments(this.state.activeCommentPage);
     event.preventDefault();
   }
 
@@ -300,22 +301,22 @@ class Notification extends Component {
               <ul className="media-list">
                 {this.state.comments.map((comment, i) => (
                   <li className="media" key={i}>
-                    <a href="#" className="pull-left">
-                      <img
-                        src="https://bootdey.com/img/Content/user_1.jpg"
-                        alt=""
-                        className="img-circle"
-                      />
-                    </a>
+                    <Link to={"/user/" + comment.userId} className="pull-left">
+                        <img
+                            src="https://bootdey.com/img/Content/user_1.jpg"
+                            alt=""
+                            className="img-circle"
+                        />
+                    </Link>
                     <div className="media-body">
                       <Link to={"/user/" + comment.userId}>
                         <strong>@{comment.userName}</strong>
                       </Link>
                       <span className="text-muted pull-right">
                         <small className="text-muted">
-                          {comment.date
-                            .replace("T", " ")
-                            .substring(0, comment.date.lastIndexOf(":"))}
+                            {comment.date
+                                .replace("T", " ")
+                                .substring(0, comment.date.lastIndexOf(":"))}
                         </small>
                       </span>
                       <p>{comment.description}</p>
