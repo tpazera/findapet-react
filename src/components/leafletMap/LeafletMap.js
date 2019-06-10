@@ -6,7 +6,10 @@ import MarkerClusterGroup from "../markerClusterGroup/MarkerClusterGroup";
 import "./leafletMap.scss";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { addCoordinates, chooseCoordinates } from "../../modules/store/actions/coordinate";
+import {
+  addCoordinates,
+  chooseCoordinates
+} from "../../modules/store/actions/coordinate";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -72,7 +75,6 @@ class LeafletMap extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    
     if (newProps.newcoords.lat2 && newProps.newcoords.lng2) {
       this.setState = {
         lat: newProps.newcoords.lat2,
@@ -81,15 +83,15 @@ class LeafletMap extends Component {
       }
     }
   }
-
-  saveLocationInfo(position) {
+  
+  saveLocationInfo = position => {
     const { longitude, latitude } = position.coords;
     this.setState({
       lng: longitude,
       lat: latitude,
       zoom: 13
     });
-  }
+  };
 
   handleMoveend = ev => {
     //this.saveLocationInfo(ev.sourceTarget.getBounds());
@@ -103,8 +105,8 @@ class LeafletMap extends Component {
   };
 
   refreshNotification(e) {
-    var doubleClickEvent = document.createEvent('MouseEvents');
-    doubleClickEvent.initEvent('dblclick', true, true);
+    var doubleClickEvent = document.createEvent("MouseEvents");
+    doubleClickEvent.initEvent("dblclick", true, true);
     e.currentTarget.dispatchEvent(doubleClickEvent); // inside method
     // this.props.refreshNotification('refresh');
   }
@@ -250,7 +252,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(addCoordinates(latitude, longitude)),
   chooseCoordinates: (latitude, longitude) =>
     dispatch(chooseCoordinates(latitude, longitude)),
-
 });
 
 const mapStateToProps = store => ({
@@ -259,5 +260,5 @@ const mapStateToProps = store => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(LeafletMap);
