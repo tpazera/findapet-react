@@ -174,7 +174,7 @@ class LeafletMap extends Component {
                                 </Popup>
                         </Marker>
                     ))} */}
-            {isListNotEmpty &&
+
               others.map(node => this.renderMarker(defaultMarker, node))}
             {isListNotEmpty &&
               dogs.map(node => this.renderMarker(dogMarker, node))}
