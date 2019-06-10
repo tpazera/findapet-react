@@ -63,7 +63,6 @@ class LeafletMap extends Component {
       lng: -0.09,
       zoom: 13
     };
-    this.saveLocationInfo = this.saveLocationInfo.bind(this);
   }
 
   componentWillMount() {
@@ -80,10 +79,10 @@ class LeafletMap extends Component {
         lat: newProps.newcoords.lat2,
         lng: newProps.newcoords.lng2,
         zoom: 13
-      }
+      };
     }
   }
-  
+
   saveLocationInfo = position => {
     const { longitude, latitude } = position.coords;
     this.setState({
@@ -110,6 +109,19 @@ class LeafletMap extends Component {
     e.currentTarget.dispatchEvent(doubleClickEvent); // inside method
     // this.props.refreshNotification('refresh');
   }
+
+  renderMarker = (icon, node) => (
+    <Marker
+      key={node.id}
+      position={[node.latitude, node.longitude]}
+      icon={icon}
+    >
+      <Popup>
+        <p>{node.title}</p>
+        <Link to={"/n/" + node.id}>KLIKNIJ</Link>
+      </Popup>
+    </Marker>
+  );
 
   render() {
     const { list } = this.props;
@@ -145,7 +157,7 @@ class LeafletMap extends Component {
           onClick={this.handleMapClick}
           center={[this.state.lat, this.state.lng]}
           zoom={this.state.zoom}
-          doubleClickZoom = {false}
+          doubleClickZoom={false}
           id="map"
           maxZoom={25}
         >
@@ -163,83 +175,17 @@ class LeafletMap extends Component {
                         </Marker>
                     ))} */}
             {isListNotEmpty &&
-              others.map(node => (
-                <Marker
-                  key={node.id}
-                  position={[node.latitude, node.longitude]}
-                  icon={defaultMarker}
-                >
-                  <Popup>
-                    <p>{node.title}</p>
-                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
-                  </Popup>
-                </Marker>
-              ))}
+              others.map(node => this.renderMarker(defaultMarker, node))}
             {isListNotEmpty &&
-              dogs.map(node => (
-                <Marker
-                  key={node.id}
-                  position={[node.latitude, node.longitude]}
-                  icon={dogMarker}
-                >
-                  <Popup>
-                    <p>{node.title}</p>
-                    <Link onClick={this.refreshNotification} to={"/n/" + node.id}>KLIKNIJ</Link>
-                  </Popup>
-                </Marker>
-              ))}
+              dogs.map(node => this.renderMarker(dogMarker, node))}
             {isListNotEmpty &&
-              cats.map(node => (
-                <Marker
-                  key={node.id}
-                  position={[node.latitude, node.longitude]}
-                  icon={catMarker}
-                >
-                  <Popup>
-                    <p>{node.title}</p>
-                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
-                  </Popup>
-                </Marker>
-              ))}
+              cats.map(node => this.renderMarker(catMarker, node))}
             {isListNotEmpty &&
-              bunnies.map(node => (
-                <Marker
-                  key={node.id}
-                  position={[node.latitude, node.longitude]}
-                  icon={bunnyMarker}
-                >
-                  <Popup>
-                    <p>{node.title}</p>
-                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
-                  </Popup>
-                </Marker>
-              ))}
+              bunnies.map(node => this.renderMarker(bunnyMarker, node))}
             {isListNotEmpty &&
-              mouses.map(node => (
-                <Marker
-                  key={node.id}
-                  position={[node.latitude, node.longitude]}
-                  icon={mouseMarker}
-                >
-                  <Popup>
-                    <p>{node.title}</p>
-                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
-                  </Popup>
-                </Marker>
-              ))}
+              mouses.map(node => this.renderMarker(mouseMarker, node))}
             {isListNotEmpty &&
-              parrots.map(node => (
-                <Marker
-                  key={node.id}
-                  position={[node.latitude, node.longitude]}
-                  icon={parrotMarker}
-                >
-                  <Popup className='popup-map'>
-                    <p>{node.title}</p>
-                    <Link to={"/n/" + node.id}>KLIKNIJ</Link>
-                  </Popup>
-                </Marker>
-              ))}
+              parrots.map(node => this.renderMarker(parrotMarker, node))}
           </MarkerClusterGroup>
         </Map>
       </>
@@ -251,7 +197,7 @@ const mapDispatchToProps = dispatch => ({
   addCoordinates: (latitude, longitude) =>
     dispatch(addCoordinates(latitude, longitude)),
   chooseCoordinates: (latitude, longitude) =>
-    dispatch(chooseCoordinates(latitude, longitude)),
+    dispatch(chooseCoordinates(latitude, longitude))
 });
 
 const mapStateToProps = store => ({
