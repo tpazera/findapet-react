@@ -113,6 +113,8 @@ class Notification extends Component {
   }
 
   handleSubmit(event) {
+    document.getElementById("addcommentbutton").disabled = true;
+    setTimeout(function(){document.getElementById("addcommentbutton").disabled = false;}, 5000);
     Axios.post(
       "https://find-pet-app.herokuapp.com/rest/comment/",
       {
@@ -127,15 +129,44 @@ class Notification extends Component {
           Authorization: localStorage.getItem("token")
         }
       }
-    ).then(response => {
-      Alert.success("Dodano komentarz", {
-        position: "bottom-left",
-        effect: "slide",
-        timeout: 3000
-      });
-    });
+    )
+        .then(response => {
+            Alert.success("Dodano komentarz", {
+                position: "bottom-left",
+                effect: "slide",
+                timeout: 3000
+            });
+        })
+        .catch(error => {
+            Alert.error("Błąd. Nie można dodawać pustych komentarzy", {
+                position: "bottom-left",
+                effect: "slide",
+                timeout: 1000
+            });
+        });
+
     this.getComments(this.state.activeCommentPage);
     event.preventDefault();
+  }
+
+  deleteComment(id, e) {
+    Axios.delete('https://find-pet-app.herokuapp.com/rest/comment/' + id, {
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            "Authorization":localStorage.getItem('token')
+        }
+    })
+    .then(response => {
+        this.getComments(this.state.activeCommentPage);
+        Alert.error("Usunięto komentarz", {
+            position: "bottom-left",
+            effect: "slide",
+            timeout: 3000
+          });
+    })
+    .catch(function(error) {
+    });
   }
 
   reportNode(e) {
@@ -288,6 +319,7 @@ class Notification extends Component {
                     variant="primary"
                     type="submit"
                     onClick={this.handleSubmit}
+                    id="addcommentbutton"
                   >
                     Dodaj komentarz
                   </Button>
@@ -316,6 +348,9 @@ class Notification extends Component {
                           {comment.date
                             .replace("T", " ")
                             .substring(0, comment.date.lastIndexOf(":"))}
+                            { comment.userId == parseInt(localStorage.getItem('id')) ? (
+                                <div className="deleteComment" onClick={(e) => this.deleteComment(comment.id, e)}>x</div>
+                            ) : <></>}
                         </small>
                       </span>
                       <p>{comment.description}</p>
