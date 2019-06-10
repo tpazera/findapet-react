@@ -1,9 +1,12 @@
 //colors
-$primary: #ed6a5a;
-$secondary: #f4f3ee;
+// $primary: #ed6a5a;
+// $secondary: #f4f3ee;
+// $black: #484848;
+// $white: #fff;
+$primary: #8CCEC5;
+$secondary: #21304F;
 $black: #484848;
 $white: #fff;
-
 
 //map breakpoint
 $mapBreakpoint: "1000px";
@@ -12,7 +15,8 @@ body {
   background-color: $white;
   color: $black;
   font-family: "Lato";
-  overflow: overlay;
+  overflow: hidden;
+  margin-top: 0;
 }
 
 $theme-colors: (

@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Modal, Button } from "react-bootstrap";
+import React from "react";
+import { Modal } from "react-bootstrap";
 import "./modal.scss";
 
-const ModalComponent = ({ children, show, toggleModal, type }) => (
+const ModalComponent = ({ children, show, toggleModal, type, title }) => (
   <Modal show={show} onHide={() => toggleModal(type)}>
     <Modal.Header closeButton>
-      <Modal.Title>Zaloguj się</Modal.Title>
+      <Modal.Title>{title}</Modal.Title>
     </Modal.Header>
 
     <Modal.Body>{children}</Modal.Body>

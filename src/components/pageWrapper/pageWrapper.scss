@@ -2,13 +2,8 @@
 
 #pageWrapper {
     position: absolute;
-    width: 50%;
-    height: auto;
-    max-height: calc(100% - 126px);
+    width: auto;
+    height: 100vh;
+    z-index: 100;
 }
 
-@media (max-width: $mapBreakpoint) {
-    #pageWrapper {
-        width: 100%;
-    }
-}
